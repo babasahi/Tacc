@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:tic_tac_toe/components/business_logic.dart';
 
 // Logic
 String playerChoice = '';
+String computerChoice = '';
+String won = 'You Won 💪 ';
+String playing = 'Playing ⏳';
+String lost = 'You Lost 😪 ';
+String draw = 'Draw 😎';
+String status = playing;
 List<String> values = [
   '',
   '',
@@ -28,10 +35,12 @@ const Color bordersColor = Colors.white;
 // TEXTSTYLES
 const TextStyle kBigChoice = TextStyle(
   fontSize: 42,
+  fontFamily: 'TitilliumWeb',
   fontWeight: FontWeight.bold,
 );
 const TextStyle kChoiceStyle = TextStyle(
-  fontSize: 18,
+  fontSize: 38,
+  fontFamily: 'TitilliumWeb',
   color: Colors.white,
   fontWeight: FontWeight.bold,
   fontStyle: FontStyle.italic,

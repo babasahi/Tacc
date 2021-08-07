@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tic_tac_toe/components/business_logic.dart';
 import 'package:tic_tac_toe/constants.dart';
 
 class PlayerPicker extends StatefulWidget {
@@ -15,7 +16,7 @@ class _PlayerPickerState extends State<PlayerPicker> {
           Container(
             margin: EdgeInsets.symmetric(vertical: 12),
             padding: EdgeInsets.all(6),
-            width: 68,
+            width: 140,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(14),
@@ -27,7 +28,7 @@ class _PlayerPickerState extends State<PlayerPicker> {
               children: [
                 Center(
                   child: Text(
-                    'Me : ',
+                    'You : ',
                     style: kChoiceStyle,
                   ),
                 ),
@@ -63,6 +64,7 @@ class _PlayerPickerState extends State<PlayerPicker> {
                           xColor = unSelectedColor;
                         } else if (xColor == unSelectedColor) {
                           playerChoice = 'X';
+                          computerChoice = 'O';
                           xColor = selectedColor;
                           oColor = unSelectedColor;
                         }
@@ -93,6 +95,7 @@ class _PlayerPickerState extends State<PlayerPicker> {
                           oColor = unSelectedColor;
                         } else if (oColor == unSelectedColor) {
                           playerChoice = 'O';
+                          computerChoice = 'X';
                           oColor = selectedColor;
                           xColor = unSelectedColor;
                         }
@@ -124,14 +127,14 @@ class _PlayerPickerState extends State<PlayerPicker> {
   }
 }
 
-class GamePanel extends StatefulWidget {
-  GamePanel(this.values);
+class GameBoard extends StatefulWidget {
+  GameBoard(this.values);
   final List<String> values;
   @override
-  _GamePanelState createState() => _GamePanelState();
+  _GameBoardState createState() => _GameBoardState();
 }
 
-class _GamePanelState extends State<GamePanel> {
+class _GameBoardState extends State<GameBoard> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -177,6 +180,28 @@ class _GamePanelState extends State<GamePanel> {
   }
 }
 
+class ScorWidget extends StatefulWidget {
+  @override
+  _ScorWidgetState createState() => _ScorWidgetState();
+}
+
+class _ScorWidgetState extends State<ScorWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text(
+        status,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 32,
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.italic,
+        ),
+      ),
+    );
+  }
+}
+
 class BoardUnit extends StatefulWidget {
   BoardUnit(this.value);
   final int value;
@@ -186,13 +211,18 @@ class BoardUnit extends StatefulWidget {
 }
 
 class _BoardUnitState extends State<BoardUnit> {
+  Logic logic = Logic();
   @override
   Widget build(BuildContext context) {
     return Center(
       child: GestureDetector(
         onTap: () {
           setState(() {
-            values[widget.value] = playerChoice;
+            status = logic.checkGame();
+
+            if (values[widget.value] == '') {
+              values[widget.value] = playerChoice;
+            }
           });
         },
         child: Container(

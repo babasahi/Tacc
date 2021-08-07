@@ -49,7 +49,8 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               PlayerPicker(),
-              GamePanel(values),
+              ScorWidget(),
+              GameBoard(values),
             ],
           ),
         ),
