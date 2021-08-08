@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 // Logic
 String playerChoice = '';
 String computerChoice = '';
+String start = 'Start Playing';
 String won = 'You Won 💪 ';
 String playing = 'Playing ⏳';
 String lost = 'You Lost 😪 ';
 String draw = 'Draw 😎';
-
+List<int> empty = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 List<String> values = [
   '',
   '',

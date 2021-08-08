@@ -191,7 +191,7 @@ class _ScorWidgetState extends State<ScorWidget> {
   Widget build(BuildContext context) {
     return Container(
       child: Text(
-        logic.checkGame(),
+        start,
         style: TextStyle(
           color: Colors.black,
           fontSize: 32,
@@ -213,17 +213,21 @@ class BoardUnit extends StatefulWidget {
 
 class _BoardUnitState extends State<BoardUnit> {
   Logic logic = Logic();
+  Computer computer = Computer();
+  ScorWidget score = ScorWidget();
   @override
   Widget build(BuildContext context) {
     return Center(
       child: GestureDetector(
         onTap: () {
           setState(() {
-            logic.checkGame();
-
             if (values[widget.value] == '') {
               values[widget.value] = playerChoice;
+              empty.remove(widget.value);
+              values[computer.playMove()] = computerChoice;
             }
+            print(logic.checkGame());
+            print(empty);
           });
         },
         child: Container(
