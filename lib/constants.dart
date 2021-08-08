@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/components/business_logic.dart';
 
 // Logic
 String playerChoice = '';
@@ -8,7 +7,7 @@ String won = 'You Won 💪 ';
 String playing = 'Playing ⏳';
 String lost = 'You Lost 😪 ';
 String draw = 'Draw 😎';
-String status = playing;
+
 List<String> values = [
   '',
   '',

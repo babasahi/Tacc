@@ -1,22 +1,22 @@
 import 'package:tic_tac_toe/constants.dart';
 
 class Logic {
+  String status = playing;
   void updateStatus() {
     checkGame();
   }
 
   String checkGame() {
-    String stat = playing;
     if (checkGamePlayer(computerChoice) == true) {
-      stat = lost;
+      status = lost;
     } else if (checkGamePlayer(playerChoice) == true) {
-      stat = won;
+      status = won;
     } else if (checkendGame() == true) {
-      stat = draw;
+      status = draw;
     } else {
-      stat = playing;
+      status = playing;
     }
-    return stat;
+    return status;
   }
 
   bool checkendGame() {
