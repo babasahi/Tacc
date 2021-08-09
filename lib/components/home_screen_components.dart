@@ -127,59 +127,6 @@ class _PlayerPickerState extends State<PlayerPicker> {
   }
 }
 
-class GameBoard extends StatefulWidget {
-  GameBoard(this.values);
-  final List<String> values;
-  @override
-  _GameBoardState createState() => _GameBoardState();
-}
-
-class _GameBoardState extends State<GameBoard> {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        padding: EdgeInsets.all(10),
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 9),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(24),
-          ),
-          color: Colors.deepPurpleAccent[400],
-        ),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                BoardUnit(0),
-                BoardUnit(1),
-                BoardUnit(2),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                BoardUnit(3),
-                BoardUnit(4),
-                BoardUnit(5),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                BoardUnit(6),
-                BoardUnit(7),
-                BoardUnit(8),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class ScorWidget extends StatefulWidget {
   @override
   _ScorWidgetState createState() => _ScorWidgetState();
@@ -203,52 +150,34 @@ class _ScorWidgetState extends State<ScorWidget> {
   }
 }
 
-class BoardUnit extends StatefulWidget {
-  BoardUnit(this.value);
-  final int value;
+class BoardUi extends StatefulWidget {
+  BoardUi(this.text);
+  final String text;
 
   @override
-  _BoardUnitState createState() => _BoardUnitState();
+  _BoardUiState createState() => _BoardUiState();
 }
 
-class _BoardUnitState extends State<BoardUnit> {
-  Logic logic = Logic();
-  Computer computer = Computer();
-  ScorWidget score = ScorWidget();
+class _BoardUiState extends State<BoardUi> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            if (values[widget.value] == '') {
-              values[widget.value] = playerChoice;
-              empty.remove(widget.value);
-              values[computer.playMove()] = computerChoice;
-            }
-            print(logic.checkGame());
-            print(empty);
-          });
-        },
-        child: Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(
-                Radius.circular(30),
-              ),
-              border: Border.all(
-                color: Colors.black,
-                width: 2,
-              )),
-          margin: EdgeInsets.all(2),
-          height: 120,
-          width: 120,
-          child: Center(
-            child: Text(
-              values[widget.value],
-              style: kMainTextStyle,
-            ),
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(
+            Radius.circular(30),
           ),
+          border: Border.all(
+            color: Colors.black,
+            width: 2,
+          )),
+      margin: EdgeInsets.all(2),
+      height: 120,
+      width: 120,
+      child: Center(
+        child: Text(
+          widget.text,
+          style: kMainTextStyle,
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tic_tac_toe/components/board.dart';
 import 'package:tic_tac_toe/components/home_screen_components.dart';
 import 'package:tic_tac_toe/constants.dart';
 import 'package:tic_tac_toe/screens/who_are_we_screen.dart';
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               PlayerPicker(),
               ScorWidget(),
-              GameBoard(values),
+              TheBoard(),
             ],
           ),
         ),

@@ -1,90 +1,56 @@
 import 'package:tic_tac_toe/constants.dart';
 
 class Logic {
-  String status = playing;
-  void updateStatus() {
-    checkGame();
-  }
-
-  String checkGame() {
-    if (checkGamePlayer(computerChoice) == true) {
-      status = lost;
-    } else if (checkGamePlayer(playerChoice) == true) {
-      status = won;
-    } else if (checkendGame() == true) {
-      status = draw;
-    } else if (checkStartGame() == true) {
-      status = start;
-    } else {
-      status = playing;
-    }
-    return status;
-  }
-
-  bool checkStartGame() {
+  bool checkStartGame(List<String> list) {
     bool result = false;
-    if (values[0] == '' &&
-        values[1] == '' &&
-        values[2] == '' &&
-        values[3] == '' &&
-        values[4] == '' &&
-        values[5] == '' &&
-        values[6] == '' &&
-        values[7] == '' &&
-        values[8] == '') {
+    if (list[0] == '' &&
+        list[1] == '' &&
+        list[2] == '' &&
+        list[3] == '' &&
+        list[4] == '' &&
+        list[5] == '' &&
+        list[6] == '' &&
+        list[7] == '' &&
+        list[8] == '') {
       result = true;
     }
     return result;
   }
 
-  bool checkendGame() {
+  bool checkendGame(List<String> list) {
     bool result = false;
-    if (values[0] != '' &&
-        values[1] != '' &&
-        values[2] != '' &&
-        values[3] != '' &&
-        values[4] != '' &&
-        values[5] != '' &&
-        values[6] != '' &&
-        values[7] != '' &&
-        values[8] != '') {
+    if (list[0] != '' &&
+        list[1] != '' &&
+        list[2] != '' &&
+        list[3] != '' &&
+        list[4] != '' &&
+        list[5] != '' &&
+        list[6] != '' &&
+        list[7] != '' &&
+        list[8] != '') {
       result = true;
     }
 
     return result;
   }
 
-  bool checkGamePlayer(String choice) {
+  bool checkGamePlayer(String choice, List<String> list) {
     bool result = false;
-    if (values[0] == choice && values[1] == choice && values[2] == choice) {
+    if (list[0] == choice && list[1] == choice && list[2] == choice) {
       result = true;
-    } else if (values[3] == choice &&
-        values[4] == choice &&
-        values[5] == choice) {
+    } else if (list[3] == choice && list[4] == choice && list[5] == choice) {
       result = true;
-    } else if (values[6] == choice &&
-        values[7] == choice &&
-        values[8] == choice) {
+    } else if (list[6] == choice && list[7] == choice && list[8] == choice) {
       result = true;
-    } else if (values[0] == choice &&
-        values[3] == choice &&
-        values[6] == choice) {
+    } else if (list[0] == choice && list[3] == choice && list[6] == choice) {
       result = true;
-    } else if (values[1] == choice &&
-        values[4] == choice &&
-        values[7] == choice) {
+    } else if (list[1] == choice && list[4] == choice && list[7] == choice) {
       result = true;
-    } else if (values[2] == choice &&
-        values[5] == choice &&
-        values[8] == choice) {
+    } else if (list[2] == choice && list[5] == choice && list[8] == choice) {
       result = true;
-    } else if (values[0] == choice &&
-        values[4] == choice &&
-        values[8] == choice) {
+    } else if (list[0] == choice && list[4] == choice && list[8] == choice) {
       result = true;
-    } else if (values[2] == choice &&
-        values[4] == choice &&
-        values[6] == choice) {
+    } else if (list[2] == choice && list[4] == choice && list[6] == choice) {
       result = true;
     }
 
@@ -93,23 +59,11 @@ class Logic {
 }
 
 class Computer {
-  Logic logic = Logic();
   int playMove() {
-    if (logic.checkGame() == playing) {
-      empty.remove(getRandom());
-    }
-    return getRandom();
-  }
+    int nextMove = empty.first;
 
-  int getRandom() {
-    int result;
+    empty.remove(nextMove);
 
-    if (empty.isNotEmpty) {
-      result = empty.first;
-    } else {
-      result = 10;
-    }
-
-    return result;
+    return nextMove;
   }
 }
