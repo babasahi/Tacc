@@ -35,6 +35,7 @@ const TextStyle kChoiceStyle = TextStyle(
 );
 const TextStyle kAppTitleStyle = TextStyle(
   fontFamily: 'Ubuntu',
+  color: Colors.black,
   fontSize: 40,
   fontWeight: FontWeight.bold,
 );

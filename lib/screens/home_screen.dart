@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
               child: Icon(
                 Icons.info,
                 size: 30,
+                color: Colors.black,
               ),
             ),
           )
