@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/components/business_logic.dart';
 import 'package:tic_tac_toe/components/home_screen_components.dart';
 import 'package:tic_tac_toe/constants.dart';
+
+String status = playing;
 
 class TheBoard extends StatefulWidget {
   TheBoard();
@@ -10,38 +13,121 @@ class TheBoard extends StatefulWidget {
   _TheBoardState createState() => _TheBoardState();
 }
 
-String status = playing;
-
-Computer computer = Computer();
-Logic logic = Logic();
-String checkGame() {
-  if (logic.checkGamePlayer(computerChoice, values) == true) {
-    status = lost;
-  } else if (logic.checkGamePlayer(playerChoice, values) == true) {
-    status = won;
-  } else if (logic.checkendGame(values) == true) {
-    status = draw;
-  } else if (logic.checkStartGame(values) == true) {
-    status = start;
-  } else {
-    status = playing;
-  }
-  return status;
-}
-
-List<String> values = [
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-];
-
 class _TheBoardState extends State<TheBoard> {
+  List<String> values = [
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+  ];
+
+  String checkGame() {
+    if (checkGamePlayer(computerChoice) == true) {
+      status = lost;
+    } else if (checkGamePlayer(playerChoice) == true) {
+      status = won;
+    } else if (checkendGame() == true) {
+      status = draw;
+    } else if (checkStartGame() == true) {
+      status = start;
+    } else {
+      status = playing;
+    }
+    return status;
+  }
+
+  bool checkStartGame() {
+    bool result = false;
+    if (values[0] == '' &&
+        values[1] == '' &&
+        values[2] == '' &&
+        values[3] == '' &&
+        values[4] == '' &&
+        values[5] == '' &&
+        values[6] == '' &&
+        values[7] == '' &&
+        values[8] == '') {
+      result = true;
+    }
+    return result;
+  }
+
+  bool checkendGame() {
+    bool result = false;
+    if (values[0] != '' &&
+        values[1] != '' &&
+        values[2] != '' &&
+        values[3] != '' &&
+        values[4] != '' &&
+        values[5] != '' &&
+        values[6] != '' &&
+        values[7] != '' &&
+        values[8] != '') {
+      result = true;
+    }
+
+    return result;
+  }
+
+  bool checkGamePlayer(String choice) {
+    bool result = false;
+    if (values[0] == choice && values[1] == choice && values[2] == choice) {
+      result = true;
+    } else if (values[3] == choice &&
+        values[4] == choice &&
+        values[5] == choice) {
+      result = true;
+    } else if (values[6] == choice &&
+        values[7] == choice &&
+        values[8] == choice) {
+      result = true;
+    } else if (values[0] == choice &&
+        values[3] == choice &&
+        values[6] == choice) {
+      result = true;
+    } else if (values[1] == choice &&
+        values[4] == choice &&
+        values[7] == choice) {
+      result = true;
+    } else if (values[2] == choice &&
+        values[5] == choice &&
+        values[8] == choice) {
+      result = true;
+    } else if (values[0] == choice &&
+        values[4] == choice &&
+        values[8] == choice) {
+      result = true;
+    } else if (values[2] == choice &&
+        values[4] == choice &&
+        values[6] == choice) {
+      result = true;
+    }
+
+    return result;
+  }
+
+  Random random = Random();
+
+  void updateState(int index) {
+    if (values[index] == '') {
+      values[index] = playerChoice;
+
+      if (checkGame() == playing) {
+        for (int x = 0; x < values.length; x++) {
+          if (values[x] == '') {
+            values[x] = computerChoice;
+            return null;
+          } else {}
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,13 +148,7 @@ class _TheBoardState extends State<TheBoard> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      if (values[0] == '') {
-                        values[0] = playerChoice;
-                        empty.remove(0);
-                        if (checkGame() == playing) {
-                          values[computer.playMove()] = computerChoice;
-                        }
-                      }
+                      updateState(0);
                     });
                   },
                   child: BoardUi(values[0]),
@@ -78,13 +158,7 @@ class _TheBoardState extends State<TheBoard> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      if (values[1] == '') {
-                        values[1] = playerChoice;
-                        empty.remove(1);
-                        if (checkGame() == playing) {
-                          values[computer.playMove()] = computerChoice;
-                        }
-                      }
+                      updateState(1);
                     });
                   },
                   child: BoardUi(values[1]),
@@ -94,13 +168,7 @@ class _TheBoardState extends State<TheBoard> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      if (values[2] == '') {
-                        values[2] = playerChoice;
-                        empty.remove(2);
-                        if (checkGame() == playing) {
-                          values[computer.playMove()] = computerChoice;
-                        }
-                      }
+                      updateState(2);
                     });
                   },
                   child: BoardUi(values[2]),
@@ -115,13 +183,7 @@ class _TheBoardState extends State<TheBoard> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      if (values[3] == '') {
-                        values[3] = playerChoice;
-                        empty.remove(3);
-                        if (checkGame() == playing) {
-                          values[computer.playMove()] = computerChoice;
-                        }
-                      }
+                      updateState(3);
                     });
                   },
                   child: BoardUi(values[3]),
@@ -131,13 +193,7 @@ class _TheBoardState extends State<TheBoard> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      if (values[4] == '') {
-                        values[4] = playerChoice;
-                        empty.remove(4);
-                        if (checkGame() == playing) {
-                          values[computer.playMove()] = computerChoice;
-                        }
-                      }
+                      updateState(4);
                     });
                   },
                   child: BoardUi(values[4]),
@@ -147,13 +203,7 @@ class _TheBoardState extends State<TheBoard> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      if (values[5] == '') {
-                        values[5] = playerChoice;
-                        empty.remove(5);
-                        if (checkGame() == playing) {
-                          values[computer.playMove()] = computerChoice;
-                        }
-                      }
+                      updateState(5);
                     });
                   },
                   child: BoardUi(values[5]),
@@ -168,13 +218,7 @@ class _TheBoardState extends State<TheBoard> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      if (values[6] == '') {
-                        values[6] = playerChoice;
-                        empty.remove(6);
-                        if (checkGame() == playing) {
-                          values[computer.playMove()] = computerChoice;
-                        }
-                      }
+                      updateState(6);
                     });
                   },
                   child: BoardUi(values[6]),
@@ -184,13 +228,7 @@ class _TheBoardState extends State<TheBoard> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      if (values[7] == '') {
-                        values[7] = playerChoice;
-                        empty.remove(7);
-                        if (checkGame() == playing) {
-                          values[computer.playMove()] = computerChoice;
-                        }
-                      }
+                      updateState(7);
                     });
                   },
                   child: BoardUi(values[7]),
@@ -200,13 +238,7 @@ class _TheBoardState extends State<TheBoard> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      if (values[8] == '') {
-                        values[8] = playerChoice;
-                        empty.remove(8);
-                        if (checkGame() == playing) {
-                          values[computer.playMove()] = computerChoice;
-                        }
-                      }
+                      updateState(8);
                     });
                   },
                   child: BoardUi(values[8]),

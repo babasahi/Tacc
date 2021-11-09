@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/components/business_logic.dart';
+import 'package:tic_tac_toe/components/board.dart';
 import 'package:tic_tac_toe/constants.dart';
 
 class PlayerPicker extends StatefulWidget {
@@ -133,12 +133,11 @@ class ScorWidget extends StatefulWidget {
 }
 
 class _ScorWidgetState extends State<ScorWidget> {
-  Logic logic = Logic();
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Text(
-        start,
+        status,
         style: TextStyle(
           color: Colors.black,
           fontSize: 32,

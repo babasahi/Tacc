@@ -8,7 +8,6 @@ String won = 'You Won 💪 ';
 String playing = 'Playing ⏳';
 String lost = 'You Lost 😪 ';
 String draw = 'Draw 😎';
-List<int> empty = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
 // COLORS :
 const Color primaryColor = Color(0xFFFFFC00);
