@@ -33,7 +33,8 @@ class _HomePageState extends State<HomePage> {
                       builder: (context) => WhoAreWe(),
                     ),
                   );
-                });
+                }
+                );
               },
               child: Icon(
                 Icons.info,
