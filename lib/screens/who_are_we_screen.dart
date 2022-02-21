@@ -49,37 +49,15 @@ class WhoAreWe extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          CircleAvatar(
-                            radius: 60,
-                            backgroundImage:
-                                AssetImage('assets/images/hemadi.jpg'),
-                          ),
-                          CircleAvatar(
+                         CircleAvatar(
                             radius: 60,
                             backgroundImage:
                                 AssetImage('assets/images/saleh.jpg'),
                           ),
-                        ],
-                      ),
                       SizedBox(
                         height: 12,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            'Hamadi Omar',
-                            style: TextStyle(
-                              fontFamily: 'Nunito',
-                              fontWeight: FontWeight.bold,
-                              fontStyle: FontStyle.italic,
-                              fontSize: 20,
-                            ),
-                          ),
-                          Text(
+                      Text(
                             'Babe Saleh Mahfoud',
                             style: TextStyle(
                               fontFamily: 'Nunito',
@@ -88,8 +66,6 @@ class WhoAreWe extends StatelessWidget {
                               fontSize: 20,
                             ),
                           ),
-                        ],
-                      ),
                     ],
                   ),
                 ),
