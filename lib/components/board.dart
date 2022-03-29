@@ -118,12 +118,14 @@ class _TheBoardState extends State<TheBoard> {
       values[index] = playerChoice;
 
       if (checkGame() == playing) {
-        for (int x = 0; x < values.length; x++) {
-          if (values[x] == '') {
-            values[x] = computerChoice;
-            return null;
-          } else {}
-        }
+        Future.delayed(Duration(milliseconds: 1050), () {
+          for (int x = 0; x < values.length; x++) {
+            if (values[x] == '') {
+              values[x] = computerChoice;
+              return null;
+            }
+          }
+        });
       }
     }
   }
