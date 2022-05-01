@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tic_tac_toe/screens/board_screen.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -8,21 +9,21 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              child: Container(
-                height: 22,
-                width: 12,
-                decoration: BoxDecoration(
-                  color: Colors.yellowAccent.withOpacity(0.4),
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
-                ),
-                child: Text('Play Now !'),
+        child: Center(
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => GameBoardPage()));
+            },
+            child: Container(
+              padding: EdgeInsets.all(22),
+              decoration: BoxDecoration(
+                color: Colors.yellowAccent.withOpacity(0.4),
+                borderRadius: BorderRadius.all(Radius.circular(12)),
               ),
+              child: Text('Play Now !'),
             ),
-          ],
+          ),
         ),
       ),
     );
