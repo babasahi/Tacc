@@ -25,7 +25,7 @@ class _GameBoardPageState extends State<GameBoardPage> {
         boardUnitValue.empty,
         boardUnitValue.empty,
         boardUnitValue.empty,
-        boardUnitValue.empty,
+        boardUnitValue.empty
       ], freeBoardUnits: [
         false,
         false,

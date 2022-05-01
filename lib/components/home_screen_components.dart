@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/components/board.dart';
+import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/constants.dart';
+import 'package:tic_tac_toe/services/game_logic_provider.dart';
 
 class PlayerPicker extends StatefulWidget {
   @override
@@ -133,11 +134,23 @@ class ScorWidget extends StatefulWidget {
 }
 
 class _ScorWidgetState extends State<ScorWidget> {
+  String getLabel() {
+    if (Provider.of<GameLogic>(context, listen: false).getGameState() ==
+        gameState.userWin) {
+      return 'You Won !';
+    } else if (Provider.of<GameLogic>(context, listen: false).getGameState() ==
+        gameState.userLose) {
+      return 'You Lost ';
+    } else {
+      return 'Playing ..';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Text(
-        status,
+        getLabel(),
         style: TextStyle(
           color: Colors.black,
           fontSize: 32,
@@ -149,36 +162,53 @@ class _ScorWidgetState extends State<ScorWidget> {
   }
 }
 
-class BoardUi extends StatefulWidget {
-  BoardUi(this.text);
-  final String text;
+enum boardUnitValue { x, o, empty }
+
+class BoardUnitWidget extends StatefulWidget {
+  BoardUnitWidget({required this.index});
+  final int index;
 
   @override
-  _BoardUiState createState() => _BoardUiState();
+  _BoardUnitWidgetState createState() => _BoardUnitWidgetState();
 }
 
-class _BoardUiState extends State<BoardUi> {
+class _BoardUnitWidgetState extends State<BoardUnitWidget> {
+  String getLabel() {
+    boardUnitValue value = Provider.of<GameLogic>(context, listen: false)
+        .boardUnitsValues[widget.index];
+    if (value == boardUnitValue.o) {
+      return 'O';
+    } else if (value == boardUnitValue.x) {
+      return 'X';
+    } else {
+      return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(
-            Radius.circular(30),
-          ),
-          border: Border.all(
-            color: Colors.black,
-            width: 2,
+    return GestureDetector(
+      onTap: () =>
+          Provider.of<GameLogic>(context, listen: false).userPlay(widget.index),
+      child: Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(
+                Radius.circular(30),
+              ),
+              border: Border.all(
+                color: Colors.black,
+                width: 2,
+              )),
+          margin: EdgeInsets.all(2),
+          height: 120,
+          width: 120,
+          child: Center(
+            child: Text(
+              getLabel(),
+              style: kMainTextStyle,
+            ),
           )),
-      margin: EdgeInsets.all(2),
-      height: 120,
-      width: 120,
-      child: Center(
-        child: Text(
-          widget.text,
-          style: kMainTextStyle,
-        ),
-      ),
     );
   }
 }
