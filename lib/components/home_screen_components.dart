@@ -159,8 +159,12 @@ class _ScorWidgetState extends State<ScorWidget> {
 }
 
 class BoardUnitWidget extends StatefulWidget {
-  BoardUnitWidget({required this.index, required this.notifyParent});
+  BoardUnitWidget(
+      {required this.index,
+      required this.notifyParent,
+      required this.uniqueKey});
   final int index;
+  final UniqueKey uniqueKey;
   final Function notifyParent;
 
   @override
@@ -192,7 +196,7 @@ class _BoardUnitWidgetState extends State<BoardUnitWidget> {
     return GestureDetector(
       onTap: () {
         Provider.of<GameLogic>(context, listen: false).userPlay(widget.index);
-
+        widget.notifyParent();
         setState(() {
           label = getLabel();
         });

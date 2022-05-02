@@ -28,23 +28,59 @@ class _TheBoardState extends State<TheBoard> {
           children: [
             Row(
               children: [
-                BoardUnitWidget(index: 0, notifyParent: refreshUi),
-                BoardUnitWidget(index: 1, notifyParent: refreshUi),
-                BoardUnitWidget(index: 2, notifyParent: refreshUi),
+                BoardUnitWidget(
+                  index: 0,
+                  notifyParent: refreshUi,
+                  uniqueKey: UniqueKey(),
+                ),
+                BoardUnitWidget(
+                  index: 1,
+                  notifyParent: refreshUi,
+                  uniqueKey: UniqueKey(),
+                ),
+                BoardUnitWidget(
+                  index: 2,
+                  notifyParent: refreshUi,
+                  uniqueKey: UniqueKey(),
+                ),
               ],
             ),
             Row(
               children: [
-                BoardUnitWidget(index: 3, notifyParent: refreshUi),
-                BoardUnitWidget(index: 4, notifyParent: refreshUi),
-                BoardUnitWidget(index: 5, notifyParent: refreshUi),
+                BoardUnitWidget(
+                  index: 3,
+                  notifyParent: refreshUi,
+                  uniqueKey: UniqueKey(),
+                ),
+                BoardUnitWidget(
+                  index: 4,
+                  notifyParent: refreshUi,
+                  uniqueKey: UniqueKey(),
+                ),
+                BoardUnitWidget(
+                  index: 5,
+                  notifyParent: refreshUi,
+                  uniqueKey: UniqueKey(),
+                ),
               ],
             ),
             Row(
               children: [
-                BoardUnitWidget(index: 6, notifyParent: refreshUi),
-                BoardUnitWidget(index: 7, notifyParent: refreshUi),
-                BoardUnitWidget(index: 8, notifyParent: refreshUi),
+                BoardUnitWidget(
+                  index: 6,
+                  notifyParent: refreshUi,
+                  uniqueKey: UniqueKey(),
+                ),
+                BoardUnitWidget(
+                  index: 7,
+                  notifyParent: refreshUi,
+                  uniqueKey: UniqueKey(),
+                ),
+                BoardUnitWidget(
+                  index: 8,
+                  notifyParent: refreshUi,
+                  uniqueKey: UniqueKey(),
+                ),
               ],
             ),
           ],
