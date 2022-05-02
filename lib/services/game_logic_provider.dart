@@ -107,10 +107,12 @@ class GameLogic extends ChangeNotifier {
   }
 
   void userPlay(int index) {
-    print('User playing .. ');
-    freeBoardUnits[index] = true;
-    userMoves.add(index);
-    print('User played .. ');
-    notifyListeners();
+    if (!freeBoardUnits[index]) {
+      freeBoardUnits[index] = true;
+      userMoves.add(index);
+      print('User played .. ');
+      print(userMoves);
+      notifyListeners();
+    }
   }
 }

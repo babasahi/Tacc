@@ -215,7 +215,7 @@ class _BoardUnitWidgetState extends State<BoardUnitWidget> {
           width: 120,
           child: Center(
             child: Text(
-              getLabel(),
+              label,
               style: kMainTextStyle,
             ),
           )),
