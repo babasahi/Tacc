@@ -9,6 +9,8 @@ class PlayerPicker extends StatefulWidget {
 }
 
 class _PlayerPickerState extends State<PlayerPicker> {
+  bool isX = false;
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -61,13 +63,10 @@ class _PlayerPickerState extends State<PlayerPicker> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        if (xColor == selectedColor) {
-                          xColor = unSelectedColor;
-                        } else if (xColor == unSelectedColor) {
-                          playerChoice = 'X';
-                          computerChoice = 'O';
-                          xColor = selectedColor;
-                          oColor = unSelectedColor;
+                        if (!isX) {
+                          isX = true;
+                          Provider.of<GameLogic>(context, listen: false)
+                              .setUserChoice(boardUnitValue.x);
                         }
                       });
                     },
@@ -77,7 +76,7 @@ class _PlayerPickerState extends State<PlayerPicker> {
                           bottomLeft: Radius.circular(14),
                           topLeft: Radius.circular(14),
                         ),
-                        color: xColor,
+                        color: isX ? selectedColor : unSelectedColor,
                       ),
                       child: Center(
                         child: Text(
@@ -92,13 +91,10 @@ class _PlayerPickerState extends State<PlayerPicker> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        if (oColor == selectedColor) {
-                          oColor = unSelectedColor;
-                        } else if (oColor == unSelectedColor) {
-                          playerChoice = 'O';
-                          computerChoice = 'X';
-                          oColor = selectedColor;
-                          xColor = unSelectedColor;
+                        if (isX) {
+                          isX = false;
+                          Provider.of<GameLogic>(context, listen: false)
+                              .setUserChoice(boardUnitValue.o);
                         }
                       });
                     },
@@ -108,7 +104,7 @@ class _PlayerPickerState extends State<PlayerPicker> {
                           bottomRight: Radius.circular(14),
                           topRight: Radius.circular(14),
                         ),
-                        color: oColor,
+                        color: isX ? unSelectedColor : selectedColor,
                       ),
                       child: Center(
                         child: Text(

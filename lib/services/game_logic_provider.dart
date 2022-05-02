@@ -11,7 +11,7 @@ enum boardUnitValue { x, o, empty }
 
 class GameLogic extends ChangeNotifier {
   List<bool> freeBoardUnits = [];
-  bool isUserX = false;
+  boardUnitValue userChoice = boardUnitValue.o;
   bool isComputerThinking = false;
   List<boardUnitValue> boardUnitsValues = [];
   List<int> userMoves = [];
@@ -40,6 +40,15 @@ class GameLogic extends ChangeNotifier {
   gameState getGameState() {
     checkState();
     return _state;
+  }
+
+  boardUnitValue getUserChoice() {
+    return userChoice;
+  }
+
+  void setUserChoice(boardUnitValue value) {
+    userChoice = value;
+    notifyListeners();
   }
 
   bool getIsComputerThinking() {
@@ -121,7 +130,7 @@ class GameLogic extends ChangeNotifier {
     if (!isComputerThinking) {
       if (!freeBoardUnits[index]) {
         freeBoardUnits[index] = true;
-        boardUnitsValues[index] = isUserX ? boardUnitValue.x : boardUnitValue.o;
+        boardUnitsValues[index] = userChoice;
         print('User played .. ');
         print(userMoves);
 

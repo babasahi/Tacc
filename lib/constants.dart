@@ -13,8 +13,6 @@ String draw = 'Draw 😎';
 const Color primaryColor = Color(0xFFFFFC00);
 Color? unSelectedColor = Colors.yellow[200];
 Color? selectedColor = Colors.yellow;
-Color? xColor = unSelectedColor;
-Color? oColor = unSelectedColor;
 
 const Color c = Color(0xFF6C12EE);
 const Color secondaryColor = Colors.white;
