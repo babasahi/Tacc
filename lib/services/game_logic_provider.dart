@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:tic_tac_toe/components/home_screen_components.dart';
 
 enum gameState {
   userWin,
@@ -8,11 +7,14 @@ enum gameState {
   playing,
 }
 
+enum boardUnitValue { x, o, empty }
+
 class GameLogic extends ChangeNotifier {
   List<bool> freeBoardUnits = [];
   List<boardUnitValue> boardUnitsValues = [];
   List<int> userMoves = [];
   List<int> computerMoves = [];
+
   gameState _state = gameState.playing;
   GameLogic({required this.boardUnitsValues, required this.freeBoardUnits});
   void computerPlay() {

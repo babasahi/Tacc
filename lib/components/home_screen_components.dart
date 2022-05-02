@@ -162,8 +162,6 @@ class _ScorWidgetState extends State<ScorWidget> {
   }
 }
 
-enum boardUnitValue { x, o, empty }
-
 class BoardUnitWidget extends StatefulWidget {
   BoardUnitWidget({required this.index});
   final int index;
