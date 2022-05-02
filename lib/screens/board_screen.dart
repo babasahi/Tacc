@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/components/board.dart';
 import 'package:tic_tac_toe/components/home_screen_components.dart';
 import 'package:tic_tac_toe/constants.dart';
 import 'package:tic_tac_toe/screens/who_are_we_screen.dart';
+import 'package:tic_tac_toe/services/game_logic_provider.dart';
 
 class GameBoardPage extends StatefulWidget {
   @override
@@ -45,19 +47,41 @@ class _GameBoardPageState extends State<GameBoardPage> {
           )
         ],
       ),
-      body: SafeArea(
-        child: Container(
-          color: Theme.of(context).backgroundColor,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              PlayerPicker(),
-              ScorWidget(),
-              TheBoard(),
-            ],
-          ),
-        ),
-      ),
+      body: ChangeNotifierProvider<GameLogic>(
+          create: (context) => GameLogic(boardUnitsValues: [
+                boardUnitValue.empty,
+                boardUnitValue.empty,
+                boardUnitValue.empty,
+                boardUnitValue.empty,
+                boardUnitValue.empty,
+                boardUnitValue.empty,
+                boardUnitValue.empty,
+                boardUnitValue.empty,
+                boardUnitValue.empty
+              ], freeBoardUnits: [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+              ]),
+          builder: (context, child) => SafeArea(
+                child: Container(
+                  color: Theme.of(context).backgroundColor,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      PlayerPicker(),
+                      ScorWidget(),
+                      TheBoard(),
+                    ],
+                  ),
+                ),
+              )),
     );
   }
 }

@@ -186,8 +186,11 @@ class _BoardUnitWidgetState extends State<BoardUnitWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () =>
-          Provider.of<GameLogic>(context, listen: false).userPlay(widget.index),
+      onTap: () {
+        setState(() {
+          Provider.of<GameLogic>(context, listen: false).userPlay(widget.index);
+        });
+      },
       child: Container(
           decoration: BoxDecoration(
               color: Colors.white,
