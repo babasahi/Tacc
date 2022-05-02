@@ -20,21 +20,27 @@ class GameLogic extends ChangeNotifier {
   gameState _state = gameState.playing;
   GameLogic({required this.boardUnitsValues, required this.freeBoardUnits});
 
-  void computerPlay() {
+  Future<void> computerPlay() async {
+    boardUnitValue computerChoice;
+    if (userChoice == boardUnitValue.o) {
+      computerChoice = boardUnitValue.x;
+    } else {
+      computerChoice = boardUnitValue.o;
+    }
     print('Computer playing .. ');
     isComputerThinking = true;
-    Future.delayed(Duration(milliseconds: 400), () {
-      for (var i = 0; i < freeBoardUnits.length; i++) {
-        if (!freeBoardUnits[i]) {
-          freeBoardUnits[i] = true;
-          computerMoves.add(i);
-        }
+    await Future.delayed(Duration(milliseconds: 400));
+    for (var i = 0; i < freeBoardUnits.length; i++) {
+      if (!freeBoardUnits[i]) {
+        freeBoardUnits[i] = true;
+        boardUnitsValues[i] = computerChoice;
+        notifyListeners();
+        break;
       }
-      print('Computer played');
-    });
+    }
+    print('Computer played');
 
     isComputerThinking = false;
-    notifyListeners();
   }
 
   gameState getGameState() {

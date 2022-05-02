@@ -9,6 +9,10 @@ class TheBoard extends StatefulWidget {
 }
 
 class _TheBoardState extends State<TheBoard> {
+  void refreshUi() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,23 +28,23 @@ class _TheBoardState extends State<TheBoard> {
           children: [
             Row(
               children: [
-                BoardUnitWidget(index: 0),
-                BoardUnitWidget(index: 1),
-                BoardUnitWidget(index: 2),
+                BoardUnitWidget(index: 0, notifyParent: refreshUi),
+                BoardUnitWidget(index: 1, notifyParent: refreshUi),
+                BoardUnitWidget(index: 2, notifyParent: refreshUi),
               ],
             ),
             Row(
               children: [
-                BoardUnitWidget(index: 3),
-                BoardUnitWidget(index: 4),
-                BoardUnitWidget(index: 5),
+                BoardUnitWidget(index: 3, notifyParent: refreshUi),
+                BoardUnitWidget(index: 4, notifyParent: refreshUi),
+                BoardUnitWidget(index: 5, notifyParent: refreshUi),
               ],
             ),
             Row(
               children: [
-                BoardUnitWidget(index: 6),
-                BoardUnitWidget(index: 7),
-                BoardUnitWidget(index: 8),
+                BoardUnitWidget(index: 6, notifyParent: refreshUi),
+                BoardUnitWidget(index: 7, notifyParent: refreshUi),
+                BoardUnitWidget(index: 8, notifyParent: refreshUi),
               ],
             ),
           ],

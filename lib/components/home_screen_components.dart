@@ -159,8 +159,9 @@ class _ScorWidgetState extends State<ScorWidget> {
 }
 
 class BoardUnitWidget extends StatefulWidget {
-  BoardUnitWidget({required this.index});
+  BoardUnitWidget({required this.index, required this.notifyParent});
   final int index;
+  final Function notifyParent;
 
   @override
   _BoardUnitWidgetState createState() => _BoardUnitWidgetState();
