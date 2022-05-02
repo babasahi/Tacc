@@ -11,6 +11,8 @@ enum boardUnitValue { x, o, empty }
 
 class GameLogic extends ChangeNotifier {
   List<bool> freeBoardUnits = [];
+  bool isUserX = false;
+  bool isComputerThinking = false;
   List<boardUnitValue> boardUnitsValues = [];
   List<int> userMoves = [];
   List<int> computerMoves = [];
@@ -20,19 +22,28 @@ class GameLogic extends ChangeNotifier {
 
   void computerPlay() {
     print('Computer playing .. ');
-    for (var i = 0; i < freeBoardUnits.length; i++) {
-      if (!freeBoardUnits[i]) {
-        freeBoardUnits[i] = true;
-        computerMoves.add(i);
+    isComputerThinking = true;
+    Future.delayed(Duration(milliseconds: 400), () {
+      for (var i = 0; i < freeBoardUnits.length; i++) {
+        if (!freeBoardUnits[i]) {
+          freeBoardUnits[i] = true;
+          computerMoves.add(i);
+        }
       }
-    }
-    print('Computer played');
+      print('Computer played');
+    });
+
+    isComputerThinking = false;
     notifyListeners();
   }
 
   gameState getGameState() {
     checkState();
     return _state;
+  }
+
+  bool getIsComputerThinking() {
+    return isComputerThinking;
   }
 
   bool isGameBoardFull() {
@@ -107,12 +118,16 @@ class GameLogic extends ChangeNotifier {
   }
 
   void userPlay(int index) {
-    if (!freeBoardUnits[index]) {
-      freeBoardUnits[index] = true;
-      userMoves.add(index);
-      print('User played .. ');
-      print(userMoves);
-      notifyListeners();
+    if (!isComputerThinking) {
+      if (!freeBoardUnits[index]) {
+        freeBoardUnits[index] = true;
+        boardUnitsValues[index] = isUserX ? boardUnitValue.x : boardUnitValue.o;
+        print('User played .. ');
+        print(userMoves);
+
+        notifyListeners();
+        computerPlay();
+      }
     }
   }
 }
