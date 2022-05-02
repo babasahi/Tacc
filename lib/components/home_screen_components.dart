@@ -171,6 +171,7 @@ class BoardUnitWidget extends StatefulWidget {
 }
 
 class _BoardUnitWidgetState extends State<BoardUnitWidget> {
+  String label = '';
   String getLabel() {
     boardUnitValue value = Provider.of<GameLogic>(context, listen: false)
         .boardUnitsValues[widget.index];
@@ -184,11 +185,19 @@ class _BoardUnitWidgetState extends State<BoardUnitWidget> {
   }
 
   @override
+  void initState() {
+    label = getLabel();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        Provider.of<GameLogic>(context, listen: false).userPlay(widget.index);
+
         setState(() {
-          Provider.of<GameLogic>(context, listen: false).userPlay(widget.index);
+          label = getLabel();
         });
       },
       child: Container(

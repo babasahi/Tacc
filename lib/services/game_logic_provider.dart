@@ -17,13 +17,16 @@ class GameLogic extends ChangeNotifier {
 
   gameState _state = gameState.playing;
   GameLogic({required this.boardUnitsValues, required this.freeBoardUnits});
+
   void computerPlay() {
+    print('Computer playing .. ');
     for (var i = 0; i < freeBoardUnits.length; i++) {
       if (!freeBoardUnits[i]) {
         freeBoardUnits[i] = true;
         computerMoves.add(i);
       }
     }
+    print('Computer played');
     notifyListeners();
   }
 
@@ -104,8 +107,10 @@ class GameLogic extends ChangeNotifier {
   }
 
   void userPlay(int index) {
+    print('User playing .. ');
     freeBoardUnits[index] = true;
     userMoves.add(index);
+    print('User played .. ');
     notifyListeners();
   }
 }
