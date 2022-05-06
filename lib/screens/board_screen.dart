@@ -12,17 +12,13 @@ class GameBoardPage extends StatefulWidget {
 }
 
 class _GameBoardPageState extends State<GameBoardPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
         backgroundColor: Theme.of(context).backgroundColor,
-        title: Text(
-          'Tacc',
-          style: kAppTitleStyle,
-        ),
+        title: Text('Tacc', style: kAppTitleStyle),
         centerTitle: true,
         actions: [
           Container(
@@ -30,19 +26,11 @@ class _GameBoardPageState extends State<GameBoardPage> {
             child: GestureDetector(
               onTap: () {
                 setState(() {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => WhoAreWe(),
-                    ),
-                  );
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => WhoAreWe()));
                 });
               },
-              child: Icon(
-                Icons.info,
-                size: 30,
-                color: Colors.black,
-              ),
+              child: Icon(Icons.info, size: 30, color: Colors.black),
             ),
           )
         ],
@@ -67,18 +55,14 @@ class _GameBoardPageState extends State<GameBoardPage> {
                 false,
                 false,
                 false,
-                false,
+                false
               ]),
           builder: (context, child) => SafeArea(
                 child: Container(
                   color: Theme.of(context).backgroundColor,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      PlayerPicker(),
-                      ScorWidget(),
-                      TheBoard(),
-                    ],
+                    children: [PlayerPicker(), ScorWidget(), TheBoard()],
                   ),
                 ),
               )),
