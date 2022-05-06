@@ -20,6 +20,15 @@ class GameLogic extends ChangeNotifier {
   gameState _state = gameState.playing;
   GameLogic({required this.boardUnitsValues, required this.freeBoardUnits});
 
+  int getRandomPlay() {
+    for (var i = 0; i < freeBoardUnits.length; i++) {
+      if (!freeBoardUnits[i]) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
   Future<void> computerPlay() async {
     boardUnitValue computerChoice;
     if (userChoice == boardUnitValue.o) {
@@ -27,19 +36,16 @@ class GameLogic extends ChangeNotifier {
     } else {
       computerChoice = boardUnitValue.o;
     }
+    int random = getRandomPlay();
     print('Computer playing .. ');
     isComputerThinking = true;
-    await Future.delayed(Duration(milliseconds: 400));
-    for (var i = 0; i < freeBoardUnits.length; i++) {
-      if (!freeBoardUnits[i]) {
-        freeBoardUnits[i] = true;
-        boardUnitsValues[i] = computerChoice;
-        notifyListeners();
-        break;
-      }
-    }
-    print('Computer played');
+    // await Future.delayed(Duration(milliseconds: 400));
+    freeBoardUnits[random] = true;
+    boardUnitsValues[random] = userChoice;
 
+    notifyListeners();
+    print('Computer played');
+    print(boardUnitsValues);
     isComputerThinking = false;
   }
 

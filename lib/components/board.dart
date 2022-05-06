@@ -9,10 +9,6 @@ class TheBoard extends StatefulWidget {
 }
 
 class _TheBoardState extends State<TheBoard> {
-  void refreshUi() {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,17 +26,14 @@ class _TheBoardState extends State<TheBoard> {
               children: [
                 BoardUnitWidget(
                   index: 0,
-                  notifyParent: refreshUi,
                   uniqueKey: UniqueKey(),
                 ),
                 BoardUnitWidget(
                   index: 1,
-                  notifyParent: refreshUi,
                   uniqueKey: UniqueKey(),
                 ),
                 BoardUnitWidget(
                   index: 2,
-                  notifyParent: refreshUi,
                   uniqueKey: UniqueKey(),
                 ),
               ],
@@ -49,17 +42,14 @@ class _TheBoardState extends State<TheBoard> {
               children: [
                 BoardUnitWidget(
                   index: 3,
-                  notifyParent: refreshUi,
                   uniqueKey: UniqueKey(),
                 ),
                 BoardUnitWidget(
                   index: 4,
-                  notifyParent: refreshUi,
                   uniqueKey: UniqueKey(),
                 ),
                 BoardUnitWidget(
                   index: 5,
-                  notifyParent: refreshUi,
                   uniqueKey: UniqueKey(),
                 ),
               ],
@@ -68,17 +58,14 @@ class _TheBoardState extends State<TheBoard> {
               children: [
                 BoardUnitWidget(
                   index: 6,
-                  notifyParent: refreshUi,
                   uniqueKey: UniqueKey(),
                 ),
                 BoardUnitWidget(
                   index: 7,
-                  notifyParent: refreshUi,
                   uniqueKey: UniqueKey(),
                 ),
                 BoardUnitWidget(
                   index: 8,
-                  notifyParent: refreshUi,
                   uniqueKey: UniqueKey(),
                 ),
               ],
