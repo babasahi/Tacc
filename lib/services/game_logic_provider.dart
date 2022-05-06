@@ -41,7 +41,7 @@ class GameLogic extends ChangeNotifier {
     isComputerThinking = true;
     // await Future.delayed(Duration(milliseconds: 400));
     freeBoardUnits[random] = true;
-    boardUnitsValues[random] = userChoice;
+    boardUnitsValues[random] = computerChoice;
 
     notifyListeners();
     print('Computer played');

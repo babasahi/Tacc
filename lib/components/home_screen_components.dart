@@ -167,10 +167,9 @@ class BoardUnitWidget extends StatefulWidget {
 }
 
 class _BoardUnitWidgetState extends State<BoardUnitWidget> {
-  String label = '';
   String getLabel() {
-    boardUnitValue value = Provider.of<GameLogic>(context, listen: false)
-        .boardUnitsValues[widget.index];
+    boardUnitValue value =
+        Provider.of<GameLogic>(context).boardUnitsValues[widget.index];
     if (value == boardUnitValue.o) {
       return 'O';
     } else if (value == boardUnitValue.x) {
@@ -181,19 +180,11 @@ class _BoardUnitWidgetState extends State<BoardUnitWidget> {
   }
 
   @override
-  void initState() {
-    label = getLabel();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Provider.of<GameLogic>(context, listen: false).userPlay(widget.index);
-
         setState(() {
-          label = getLabel();
+          Provider.of<GameLogic>(context, listen: false).userPlay(widget.index);
         });
       },
       child: Container(
@@ -211,7 +202,7 @@ class _BoardUnitWidgetState extends State<BoardUnitWidget> {
           width: 120,
           child: Center(
             child: Text(
-              label,
+              getLabel(),
               style: kMainTextStyle,
             ),
           )),
