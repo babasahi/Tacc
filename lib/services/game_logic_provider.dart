@@ -29,15 +29,15 @@ class GameLogic extends ChangeNotifier {
   }
 
   bool stillPlaying() {
-    if (checkState() == gameState.even) {
-      return false;
-    } else if (checkState() == gameState.userWin) {
-      return false;
+    bool still = true;
+    if (checkState() == gameState.userWin) {
+      still = false;
     } else if (checkState() == gameState.userLose) {
-      return false;
-    } else {
-      return true;
+      still = false;
+    } else if (checkState() == gameState.even) {
+      still = false;
     }
+    return still;
   }
 
   Future<void> computerPlay() async {
@@ -85,19 +85,21 @@ class GameLogic extends ChangeNotifier {
   }
 
   gameState checkState() {
+    gameState state;
     if (isWin()) {
       print(gameState.userWin);
-      return gameState.userWin;
+      state = gameState.userWin;
     } else if (isLose()) {
       print(gameState.userLose);
-      return gameState.userLose;
+      state = gameState.userLose;
     } else if (isEven()) {
       print(gameState.even);
-      return gameState.even;
+      state = gameState.even;
     } else {
       print(gameState.playing);
-      return gameState.playing;
+      state = gameState.playing;
     }
+    return state;
   }
 
   bool isWin() {
@@ -166,7 +168,7 @@ class GameLogic extends ChangeNotifier {
   }
 
   bool isEven() {
-    if ((!isWin()) && (!isLose()) && boardUnitsValues.length >= 9) {
+    if (boardUnitsValues.length >= 8) {
       return true;
     } else {
       return false;
@@ -190,69 +192,3 @@ class GameLogic extends ChangeNotifier {
     }
   }
 }
-
-
-  // if (userMoves.length < 3 && computerMoves.length < 3) {
-  //     print(gameState.playing);
-  //     return gameState.playing;
-  //   } else {
-  //     if (userMoves.contains(0) &&
-  //             userMoves.contains(1) &&
-  //             userMoves.contains(2) ||
-  //         userMoves.contains(3) &&
-  //             userMoves.contains(4) &&
-  //             userMoves.contains(5) ||
-  //         userMoves.contains(6) &&
-  //             userMoves.contains(7) &&
-  //             userMoves.contains(8) ||
-  //         userMoves.contains(0) &&
-  //             userMoves.contains(3) &&
-  //             userMoves.contains(6) ||
-  //         userMoves.contains(1) &&
-  //             userMoves.contains(4) &&
-  //             userMoves.contains(7) ||
-  //         userMoves.contains(2) &&
-  //             userMoves.contains(5) &&
-  //             userMoves.contains(8) ||
-  //         userMoves.contains(2) &&
-  //             userMoves.contains(4) &&
-  //             userMoves.contains(6) ||
-  //         userMoves.contains(0) &&
-  //             userMoves.contains(4) &&
-  //             userMoves.contains(8)) {
-  //       print(gameState.userWin);
-  //       return gameState.userWin;
-  //     } else if (computerMoves.contains(0) &&
-  //             computerMoves.contains(1) &&
-  //             computerMoves.contains(2) ||
-  //         computerMoves.contains(3) &&
-  //             computerMoves.contains(4) &&
-  //             computerMoves.contains(5) ||
-  //         computerMoves.contains(6) &&
-  //             computerMoves.contains(7) &&
-  //             computerMoves.contains(8) ||
-  //         computerMoves.contains(0) &&
-  //             computerMoves.contains(3) &&
-  //             computerMoves.contains(6) ||
-  //         computerMoves.contains(1) &&
-  //             computerMoves.contains(4) &&
-  //             computerMoves.contains(7) ||
-  //         computerMoves.contains(2) &&
-  //             computerMoves.contains(5) &&
-  //             computerMoves.contains(8) ||
-  //         computerMoves.contains(2) &&
-  //             computerMoves.contains(4) &&
-  //             computerMoves.contains(6) ||
-  //         computerMoves.contains(0) &&
-  //             computerMoves.contains(4) &&
-  //             computerMoves.contains(8)) {
-  //       print(gameState.userLose);
-  //       return gameState.userLose;
-  //     } else if (isGameBoardFull()) {
-  //       print(gameState.even);
-  //       return gameState.even;
-  //     } else {
-  //       print(gameState.playing);
-  //       return gameState.playing;
-  //     }
-  //   }
