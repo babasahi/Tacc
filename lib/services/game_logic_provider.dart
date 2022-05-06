@@ -67,6 +67,14 @@ class GameLogic extends ChangeNotifier {
     return userChoice;
   }
 
+  void resetBoard() {
+    boardUnitsValues.clear();
+    freeBoardUnits.clear();
+    userMoves.clear();
+    computerMoves.clear();
+    notifyListeners();
+  }
+
   void setUserChoice(boardUnitValue value) {
     userChoice = value;
     notifyListeners();
@@ -74,16 +82,6 @@ class GameLogic extends ChangeNotifier {
 
   bool getIsComputerThinking() {
     return isComputerThinking;
-  }
-
-  bool isGameBoardFull() {
-    bool f = false;
-    for (var i = 0; i < freeBoardUnits.length; i++) {
-      if (!freeBoardUnits[i]) {
-        f = true;
-      }
-    }
-    return f;
   }
 
   gameState checkState() {
@@ -168,7 +166,7 @@ class GameLogic extends ChangeNotifier {
   }
 
   bool isEven() {
-    if (!isWin() && !isLose() && boardUnitsValues.length >= 9) {
+    if ((!isWin()) && (!isLose()) && boardUnitsValues.length >= 9) {
       return true;
     } else {
       return false;

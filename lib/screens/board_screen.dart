@@ -12,7 +12,7 @@ class GameBoardPage extends StatefulWidget {
 }
 
 class _GameBoardPageState extends State<GameBoardPage> {
-  @override
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
