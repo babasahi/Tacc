@@ -17,7 +17,6 @@ class GameLogic extends ChangeNotifier {
   List<int> userMoves = [];
   List<int> computerMoves = [];
 
-  gameState _state = gameState.playing;
   GameLogic({required this.boardUnitsValues, required this.freeBoardUnits});
 
   int getRandomPlay() {
@@ -49,11 +48,6 @@ class GameLogic extends ChangeNotifier {
     isComputerThinking = false;
   }
 
-  gameState getGameState() {
-    checkState();
-    return _state;
-  }
-
   boardUnitValue getUserChoice() {
     return userChoice;
   }
@@ -77,9 +71,9 @@ class GameLogic extends ChangeNotifier {
     return f;
   }
 
-  void checkState() {
+  gameState checkState() {
     if (userMoves.length < 3 && computerMoves.length < 3) {
-      _state = gameState.playing;
+      return gameState.playing;
     } else {
       if (userMoves.contains(0) &&
               userMoves.contains(1) &&
@@ -105,7 +99,7 @@ class GameLogic extends ChangeNotifier {
           userMoves.contains(0) &&
               userMoves.contains(4) &&
               userMoves.contains(8)) {
-        _state = gameState.userWin;
+        return gameState.userWin;
       } else if (computerMoves.contains(0) &&
               computerMoves.contains(1) &&
               computerMoves.contains(2) ||
@@ -130,12 +124,13 @@ class GameLogic extends ChangeNotifier {
           computerMoves.contains(0) &&
               computerMoves.contains(4) &&
               computerMoves.contains(8)) {
-        _state = gameState.userLose;
+        return gameState.userLose;
       } else if (isGameBoardFull()) {
-        _state = gameState.even;
+        return gameState.even;
+      } else {
+        return gameState.playing;
       }
     }
-    notifyListeners();
   }
 
   void userPlay(int index) {
