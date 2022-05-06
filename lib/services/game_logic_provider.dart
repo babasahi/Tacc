@@ -28,6 +28,18 @@ class GameLogic extends ChangeNotifier {
     return -1;
   }
 
+  bool stillPlaying() {
+    if (checkState() == gameState.even) {
+      return false;
+    } else if (checkState() == gameState.userWin) {
+      return false;
+    } else if (checkState() == gameState.userLose) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   Future<void> computerPlay() async {
     boardUnitValue computerChoice;
     if (userChoice == boardUnitValue.o) {
@@ -35,17 +47,20 @@ class GameLogic extends ChangeNotifier {
     } else {
       computerChoice = boardUnitValue.o;
     }
-    int random = getRandomPlay();
-    print('Computer playing .. ');
-    isComputerThinking = true;
-    // await Future.delayed(Duration(milliseconds: 400));
-    freeBoardUnits[random] = true;
-    boardUnitsValues[random] = computerChoice;
-
-    notifyListeners();
-    print('Computer played');
-    print(boardUnitsValues);
-    isComputerThinking = false;
+    if (stillPlaying()) {
+      int random = getRandomPlay();
+      print('Computer playing .. ');
+      isComputerThinking = true;
+      // await Future.delayed(Duration(milliseconds: 400));
+      freeBoardUnits[random] = true;
+      boardUnitsValues[random] = computerChoice;
+      computerMoves.add(random);
+      checkState();
+      notifyListeners();
+      print('Computer played');
+      print(boardUnitsValues);
+      isComputerThinking = false;
+    }
   }
 
   boardUnitValue getUserChoice() {
@@ -72,78 +87,174 @@ class GameLogic extends ChangeNotifier {
   }
 
   gameState checkState() {
-    if (userMoves.length < 3 && computerMoves.length < 3) {
-      return gameState.playing;
+    if (isWin()) {
+      print(gameState.userWin);
+      return gameState.userWin;
+    } else if (isLose()) {
+      print(gameState.userLose);
+      return gameState.userLose;
+    } else if (isEven()) {
+      print(gameState.even);
+      return gameState.even;
     } else {
-      if (userMoves.contains(0) &&
-              userMoves.contains(1) &&
-              userMoves.contains(2) ||
-          userMoves.contains(3) &&
-              userMoves.contains(4) &&
-              userMoves.contains(5) ||
-          userMoves.contains(6) &&
-              userMoves.contains(7) &&
-              userMoves.contains(8) ||
-          userMoves.contains(0) &&
-              userMoves.contains(3) &&
-              userMoves.contains(6) ||
-          userMoves.contains(1) &&
-              userMoves.contains(4) &&
-              userMoves.contains(7) ||
-          userMoves.contains(2) &&
-              userMoves.contains(5) &&
-              userMoves.contains(8) ||
-          userMoves.contains(2) &&
-              userMoves.contains(4) &&
-              userMoves.contains(6) ||
-          userMoves.contains(0) &&
-              userMoves.contains(4) &&
-              userMoves.contains(8)) {
-        return gameState.userWin;
-      } else if (computerMoves.contains(0) &&
-              computerMoves.contains(1) &&
-              computerMoves.contains(2) ||
-          computerMoves.contains(3) &&
-              computerMoves.contains(4) &&
-              computerMoves.contains(5) ||
-          computerMoves.contains(6) &&
-              computerMoves.contains(7) &&
-              computerMoves.contains(8) ||
-          computerMoves.contains(0) &&
-              computerMoves.contains(3) &&
-              computerMoves.contains(6) ||
-          computerMoves.contains(1) &&
-              computerMoves.contains(4) &&
-              computerMoves.contains(7) ||
-          computerMoves.contains(2) &&
-              computerMoves.contains(5) &&
-              computerMoves.contains(8) ||
-          computerMoves.contains(2) &&
-              computerMoves.contains(4) &&
-              computerMoves.contains(6) ||
-          computerMoves.contains(0) &&
-              computerMoves.contains(4) &&
-              computerMoves.contains(8)) {
-        return gameState.userLose;
-      } else if (isGameBoardFull()) {
-        return gameState.even;
-      } else {
-        return gameState.playing;
-      }
+      print(gameState.playing);
+      return gameState.playing;
+    }
+  }
+
+  bool isWin() {
+    if (userMoves.contains(0) &&
+            userMoves.contains(1) &&
+            userMoves.contains(2) ||
+        userMoves.contains(3) &&
+            userMoves.contains(4) &&
+            userMoves.contains(5) ||
+        userMoves.contains(6) &&
+            userMoves.contains(7) &&
+            userMoves.contains(8) ||
+        userMoves.contains(0) &&
+            userMoves.contains(3) &&
+            userMoves.contains(6) ||
+        userMoves.contains(1) &&
+            userMoves.contains(4) &&
+            userMoves.contains(7) ||
+        userMoves.contains(2) &&
+            userMoves.contains(5) &&
+            userMoves.contains(8) ||
+        userMoves.contains(2) &&
+            userMoves.contains(4) &&
+            userMoves.contains(6) ||
+        userMoves.contains(0) &&
+            userMoves.contains(4) &&
+            userMoves.contains(8)) {
+      print('User Won !');
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool isLose() {
+    if (computerMoves.contains(0) &&
+            computerMoves.contains(1) &&
+            computerMoves.contains(2) ||
+        computerMoves.contains(3) &&
+            computerMoves.contains(4) &&
+            computerMoves.contains(5) ||
+        computerMoves.contains(6) &&
+            computerMoves.contains(7) &&
+            computerMoves.contains(8) ||
+        computerMoves.contains(0) &&
+            computerMoves.contains(3) &&
+            computerMoves.contains(6) ||
+        computerMoves.contains(1) &&
+            computerMoves.contains(4) &&
+            computerMoves.contains(7) ||
+        computerMoves.contains(2) &&
+            computerMoves.contains(5) &&
+            computerMoves.contains(8) ||
+        computerMoves.contains(2) &&
+            computerMoves.contains(4) &&
+            computerMoves.contains(6) ||
+        computerMoves.contains(0) &&
+            computerMoves.contains(4) &&
+            computerMoves.contains(8)) {
+      print(gameState.userLose);
+
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool isEven() {
+    if (!isWin() && !isLose() && boardUnitsValues.length >= 9) {
+      return true;
+    } else {
+      return false;
     }
   }
 
   void userPlay(int index) {
-    if (!isComputerThinking) {
-      if (!freeBoardUnits[index]) {
-        freeBoardUnits[index] = true;
-        boardUnitsValues[index] = userChoice;
-        print('User played .. ');
-        print(userMoves);
-
-        notifyListeners();
-        computerPlay();
+    if (stillPlaying()) {
+      if (!isComputerThinking) {
+        if (!freeBoardUnits[index]) {
+          freeBoardUnits[index] = true;
+          boardUnitsValues[index] = userChoice;
+          userMoves.add(index);
+          print('User played .. ');
+          print(userMoves);
+          checkState();
+          notifyListeners();
+          computerPlay();
+        }
       }
     }
   }
 }
+
+
+  // if (userMoves.length < 3 && computerMoves.length < 3) {
+  //     print(gameState.playing);
+  //     return gameState.playing;
+  //   } else {
+  //     if (userMoves.contains(0) &&
+  //             userMoves.contains(1) &&
+  //             userMoves.contains(2) ||
+  //         userMoves.contains(3) &&
+  //             userMoves.contains(4) &&
+  //             userMoves.contains(5) ||
+  //         userMoves.contains(6) &&
+  //             userMoves.contains(7) &&
+  //             userMoves.contains(8) ||
+  //         userMoves.contains(0) &&
+  //             userMoves.contains(3) &&
+  //             userMoves.contains(6) ||
+  //         userMoves.contains(1) &&
+  //             userMoves.contains(4) &&
+  //             userMoves.contains(7) ||
+  //         userMoves.contains(2) &&
+  //             userMoves.contains(5) &&
+  //             userMoves.contains(8) ||
+  //         userMoves.contains(2) &&
+  //             userMoves.contains(4) &&
+  //             userMoves.contains(6) ||
+  //         userMoves.contains(0) &&
+  //             userMoves.contains(4) &&
+  //             userMoves.contains(8)) {
+  //       print(gameState.userWin);
+  //       return gameState.userWin;
+  //     } else if (computerMoves.contains(0) &&
+  //             computerMoves.contains(1) &&
+  //             computerMoves.contains(2) ||
+  //         computerMoves.contains(3) &&
+  //             computerMoves.contains(4) &&
+  //             computerMoves.contains(5) ||
+  //         computerMoves.contains(6) &&
+  //             computerMoves.contains(7) &&
+  //             computerMoves.contains(8) ||
+  //         computerMoves.contains(0) &&
+  //             computerMoves.contains(3) &&
+  //             computerMoves.contains(6) ||
+  //         computerMoves.contains(1) &&
+  //             computerMoves.contains(4) &&
+  //             computerMoves.contains(7) ||
+  //         computerMoves.contains(2) &&
+  //             computerMoves.contains(5) &&
+  //             computerMoves.contains(8) ||
+  //         computerMoves.contains(2) &&
+  //             computerMoves.contains(4) &&
+  //             computerMoves.contains(6) ||
+  //         computerMoves.contains(0) &&
+  //             computerMoves.contains(4) &&
+  //             computerMoves.contains(8)) {
+  //       print(gameState.userLose);
+  //       return gameState.userLose;
+  //     } else if (isGameBoardFull()) {
+  //       print(gameState.even);
+  //       return gameState.even;
+  //     } else {
+  //       print(gameState.playing);
+  //       return gameState.playing;
+  //     }
+  //   }
