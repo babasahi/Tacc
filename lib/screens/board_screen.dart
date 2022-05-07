@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/components/board.dart';
 import 'package:tic_tac_toe/components/home_screen_components.dart';
@@ -12,6 +13,28 @@ class GameBoardPage extends StatefulWidget {
 }
 
 class _GameBoardPageState extends State<GameBoardPage> {
+  Widget showModal() {
+    Provider.of<GameLogic>(context, listen: false).getShowAlert()
+        ? showMaterialModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return Container(
+                height: 120,
+                decoration: BoxDecoration(
+                  color: Colors.greenAccent.withOpacity(0.4),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12)),
+                ),
+                child: Text('end'),
+              );
+            })
+        : print('');
+    return SizedBox(
+      height: 0,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +85,12 @@ class _GameBoardPageState extends State<GameBoardPage> {
                   color: Theme.of(context).backgroundColor,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [PlayerPicker(), ScorWidget(), TheBoard()],
+                    children: [
+                      PlayerPicker(),
+                      ScorWidget(),
+                      TheBoard(),
+                      showModal()
+                    ],
                   ),
                 ),
               )),

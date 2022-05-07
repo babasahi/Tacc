@@ -16,6 +16,7 @@ class GameLogic extends ChangeNotifier {
   List<boardUnitValue> boardUnitsValues = [];
   List<int> userMoves = [];
   List<int> computerMoves = [];
+  bool showAlert = false;
 
   GameLogic({required this.boardUnitsValues, required this.freeBoardUnits});
 
@@ -84,17 +85,24 @@ class GameLogic extends ChangeNotifier {
     return isComputerThinking;
   }
 
+  bool getShowAlert() {
+    return showAlert;
+  }
+
   gameState checkState() {
     gameState state;
     if (isWin()) {
       print(gameState.userWin);
       state = gameState.userWin;
+      showAlert = true;
     } else if (isLose()) {
       print(gameState.userLose);
       state = gameState.userLose;
+      showAlert = true;
     } else if (isEven()) {
       print(gameState.even);
       state = gameState.even;
+      showAlert = true;
     } else {
       print(gameState.playing);
       state = gameState.playing;
