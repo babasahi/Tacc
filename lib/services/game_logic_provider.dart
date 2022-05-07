@@ -168,7 +168,7 @@ class GameLogic extends ChangeNotifier {
   }
 
   bool isEven() {
-    if (boardUnitsValues.length >= 8) {
+    if ((computerMoves.length + userMoves.length) >= 8) {
       return true;
     } else {
       return false;
