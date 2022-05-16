@@ -8,23 +8,36 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: Center(
-        child: GestureDetector(
+      child: Stack(children: [
+        Container(
+          padding: EdgeInsets.all(22),
+          decoration: BoxDecoration(
+            color: Colors.red,
+            image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage('assets/images/background.jpg')),
+          ),
+        ),
+        GestureDetector(
           onTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => GameBoardPage()));
           },
-          child: Container(
-            padding: EdgeInsets.all(22),
-            decoration: BoxDecoration(
-              color: Colors.yellowAccent.withOpacity(0.4),
-              image: DecorationImage(image: AssetImage('')),
-              borderRadius: BorderRadius.all(Radius.circular(12)),
+          child: Center(
+            child: Container(
+              padding: EdgeInsets.all(22),
+              decoration: BoxDecoration(
+                color: Colors.yellowAccent.withOpacity(1),
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+              ),
+              child: Text(
+                'Play Now !',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
-            child: Text('Play Now !'),
           ),
         ),
-      ),
+      ]),
     ));
   }
 }
