@@ -22,7 +22,7 @@ class GameLogic extends ChangeNotifier {
 
   int getRandomPlay() {
     List<int> avalaibles = [];
-    int random;
+
     for (var i = 0; i < freeBoardUnits.length; i++) {
       if (!freeBoardUnits[i]) {
         avalaibles.add(i);

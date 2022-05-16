@@ -7,24 +7,24 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
         body: SafeArea(
-          child: Center(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => GameBoardPage()));
-              },
-              child: Container(
-                padding: EdgeInsets.all(22),
-                decoration: BoxDecoration(
-                  color: Colors.yellowAccent.withOpacity(0.4),
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
-                ),
-                child: Text('Play Now !'),
-              ),
+      child: Center(
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => GameBoardPage()));
+          },
+          child: Container(
+            padding: EdgeInsets.all(22),
+            decoration: BoxDecoration(
+              color: Colors.yellowAccent.withOpacity(0.4),
+              image: DecorationImage(image: AssetImage('')),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
+            child: Text('Play Now !'),
           ),
-        ));
+        ),
+      ),
+    ));
   }
 }
