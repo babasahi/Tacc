@@ -25,6 +25,7 @@ class GameLogic extends ChangeNotifier {
     computerMoves.clear();
     userMoves.clear();
     showAlert = false;
+    notifyListeners();
   }
 
   int getRandomPlay() {
