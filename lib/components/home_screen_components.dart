@@ -66,7 +66,7 @@ class _PlayerPickerState extends State<PlayerPicker> {
                         if (!isX) {
                           isX = true;
                           Provider.of<GameLogic>(context, listen: false)
-                              .setUserChoice(boardUnitValue.x);
+                              .setUserChoice(BoardUnitValue.x);
                         }
                       });
                     },
@@ -94,7 +94,7 @@ class _PlayerPickerState extends State<PlayerPicker> {
                         if (isX) {
                           isX = false;
                           Provider.of<GameLogic>(context, listen: false)
-                              .setUserChoice(boardUnitValue.o);
+                              .setUserChoice(BoardUnitValue.o);
                         }
                       });
                     },
@@ -131,10 +131,10 @@ class ScorWidget extends StatefulWidget {
 
 class _ScorWidgetState extends State<ScorWidget> {
   String getLabel() {
-    if (Provider.of<GameLogic>(context).checkState() == gameState.userWin) {
+    if (Provider.of<GameLogic>(context).checkState() == GameState.userWin) {
       return 'You Won !';
     } else if (Provider.of<GameLogic>(context, listen: false).checkState() ==
-        gameState.userLose) {
+        GameState.userLose) {
       return 'You Lost ';
     } else {
       return 'Playing ..';
@@ -167,11 +167,11 @@ class BoardUnitWidget extends StatefulWidget {
 
 class _BoardUnitWidgetState extends State<BoardUnitWidget> {
   String getLabel() {
-    boardUnitValue value =
+    BoardUnitValue value =
         Provider.of<GameLogic>(context).boardUnitsValues[widget.index];
-    if (value == boardUnitValue.o) {
+    if (value == BoardUnitValue.o) {
       return 'O';
-    } else if (value == boardUnitValue.x) {
+    } else if (value == BoardUnitValue.x) {
       return 'X';
     } else {
       return '';

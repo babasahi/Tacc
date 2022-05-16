@@ -60,15 +60,15 @@ class _GameBoardPageState extends State<GameBoardPage> {
       ),
       body: ChangeNotifierProvider<GameLogic>(
           create: (context) => GameLogic(boardUnitsValues: [
-                boardUnitValue.empty,
-                boardUnitValue.empty,
-                boardUnitValue.empty,
-                boardUnitValue.empty,
-                boardUnitValue.empty,
-                boardUnitValue.empty,
-                boardUnitValue.empty,
-                boardUnitValue.empty,
-                boardUnitValue.empty
+                BoardUnitValue.empty,
+                BoardUnitValue.empty,
+                BoardUnitValue.empty,
+                BoardUnitValue.empty,
+                BoardUnitValue.empty,
+                BoardUnitValue.empty,
+                BoardUnitValue.empty,
+                BoardUnitValue.empty,
+                BoardUnitValue.empty
               ], freeBoardUnits: [
                 false,
                 false,
