@@ -89,7 +89,7 @@ class _GameBoardPageState extends State<GameBoardPage> {
                       PlayerPicker(),
                       ScorWidget(),
                       TheBoard(),
-                      showModal()
+                      // showModal()
                     ],
                   ),
                 ),

@@ -21,12 +21,21 @@ class GameLogic extends ChangeNotifier {
   GameLogic({required this.boardUnitsValues, required this.freeBoardUnits});
 
   int getRandomPlay() {
+    List<int> avalaibles = [];
+    int random;
     for (var i = 0; i < freeBoardUnits.length; i++) {
       if (!freeBoardUnits[i]) {
-        return i;
+        avalaibles.add(i);
       }
     }
-    return -1;
+
+    if (avalaibles.length > 0) {
+      // to get random numbers
+      avalaibles.shuffle();
+      return avalaibles.last;
+    } else {
+      return -1;
+    }
   }
 
   bool stillPlaying() {
