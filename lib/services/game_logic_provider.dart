@@ -19,6 +19,13 @@ class GameLogic extends ChangeNotifier {
   bool showAlert = false;
 
   GameLogic({required this.boardUnitsValues, required this.freeBoardUnits});
+  void restartGame() {
+    freeBoardUnits.clear();
+    boardUnitsValues.clear();
+    computerMoves.clear();
+    userMoves.clear();
+    showAlert = false;
+  }
 
   int getRandomPlay() {
     List<int> avalaibles = [];
