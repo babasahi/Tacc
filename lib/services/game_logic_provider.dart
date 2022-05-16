@@ -1,19 +1,19 @@
 import 'package:flutter/foundation.dart';
 
-enum gameState {
+enum GameState {
   userWin,
   userLose,
   even,
   playing,
 }
 
-enum boardUnitValue { x, o, empty }
+enum BoardUnitValue { x, o, empty }
 
 class GameLogic extends ChangeNotifier {
   List<bool> freeBoardUnits = [];
-  boardUnitValue userChoice = boardUnitValue.o;
+  BoardUnitValue userChoice = BoardUnitValue.o;
   bool isComputerThinking = false;
-  List<boardUnitValue> boardUnitsValues = [];
+  List<BoardUnitValue> boardUnitsValues = [];
   List<int> userMoves = [];
   List<int> computerMoves = [];
   bool showAlert = false;
@@ -31,22 +31,22 @@ class GameLogic extends ChangeNotifier {
 
   bool stillPlaying() {
     bool still = true;
-    if (checkState() == gameState.userWin) {
+    if (checkState() == GameState.userWin) {
       still = false;
-    } else if (checkState() == gameState.userLose) {
+    } else if (checkState() == GameState.userLose) {
       still = false;
-    } else if (checkState() == gameState.even) {
+    } else if (checkState() == GameState.even) {
       still = false;
     }
     return still;
   }
 
   Future<void> computerPlay() async {
-    boardUnitValue computerChoice;
-    if (userChoice == boardUnitValue.o) {
-      computerChoice = boardUnitValue.x;
+    BoardUnitValue computerChoice;
+    if (userChoice == BoardUnitValue.o) {
+      computerChoice = BoardUnitValue.x;
     } else {
-      computerChoice = boardUnitValue.o;
+      computerChoice = BoardUnitValue.o;
     }
     if (stillPlaying()) {
       int random = getRandomPlay();
@@ -64,7 +64,7 @@ class GameLogic extends ChangeNotifier {
     }
   }
 
-  boardUnitValue getUserChoice() {
+  BoardUnitValue getUserChoice() {
     return userChoice;
   }
 
@@ -76,7 +76,7 @@ class GameLogic extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setUserChoice(boardUnitValue value) {
+  void setUserChoice(BoardUnitValue value) {
     userChoice = value;
     notifyListeners();
   }
@@ -89,23 +89,23 @@ class GameLogic extends ChangeNotifier {
     return showAlert;
   }
 
-  gameState checkState() {
-    gameState state;
+  GameState checkState() {
+    GameState state;
     if (isWin()) {
-      print(gameState.userWin);
-      state = gameState.userWin;
+      print(GameState.userWin);
+      state = GameState.userWin;
       showAlert = true;
     } else if (isLose()) {
-      print(gameState.userLose);
-      state = gameState.userLose;
+      print(GameState.userLose);
+      state = GameState.userLose;
       showAlert = true;
     } else if (isEven()) {
-      print(gameState.even);
-      state = gameState.even;
+      print(GameState.even);
+      state = GameState.even;
       showAlert = true;
     } else {
-      print(gameState.playing);
-      state = gameState.playing;
+      print(GameState.playing);
+      state = GameState.playing;
     }
     return state;
   }
@@ -167,7 +167,7 @@ class GameLogic extends ChangeNotifier {
         computerMoves.contains(0) &&
             computerMoves.contains(4) &&
             computerMoves.contains(8)) {
-      print(gameState.userLose);
+      print(GameState.userLose);
 
       return true;
     } else {
