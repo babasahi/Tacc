@@ -131,7 +131,8 @@ class ScorWidget extends StatefulWidget {
 
 class _ScorWidgetState extends State<ScorWidget> {
   String getLabel() {
-    if (Provider.of<GameLogic>(context).checkState() == GameState.userWin) {
+    if (Provider.of<GameLogic>(context, listen: false).checkState() ==
+        GameState.userWin) {
       return 'You Won 👌';
     } else if (Provider.of<GameLogic>(context, listen: false).checkState() ==
         GameState.userLose) {
@@ -170,8 +171,10 @@ class BoardUnitWidget extends StatefulWidget {
 
 class _BoardUnitWidgetState extends State<BoardUnitWidget> {
   String getLabel() {
-    BoardUnitValue value =
-        Provider.of<GameLogic>(context).boardUnitsValues[widget.index];
+    BoardUnitValue value = BoardUnitValue.empty;
+    try {
+      value = Provider.of<GameLogic>(context).boardUnitsValues[widget.index];
+    } catch (e) {}
     if (value == BoardUnitValue.o) {
       return 'O';
     } else if (value == BoardUnitValue.x) {
@@ -222,13 +225,12 @@ class PlayAgain extends StatefulWidget {
 class _PlayAgainState extends State<PlayAgain> {
   @override
   Widget build(BuildContext context) {
-    return Provider.of<GameLogic>(context, listen: false).getShowAlert()
-        ? Container(
-            margin: EdgeInsets.only(bottom: 8),
-            child: GestureDetector(
+    return Container(
+      margin: EdgeInsets.only(bottom: 8),
+      child: Provider.of<GameLogic>(context).getShowAlert()
+          ? GestureDetector(
               onTap: () {
                 Provider.of<GameLogic>(context, listen: false).restartGame();
-                setState(() {});
               },
               child: Material(
                 elevation: 8,
@@ -248,8 +250,8 @@ class _PlayAgainState extends State<PlayAgain> {
                   ),
                 ),
               ),
-            ),
-          )
-        : SizedBox();
+            )
+          : SizedBox(),
+    );
   }
 }

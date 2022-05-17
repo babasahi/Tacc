@@ -21,10 +21,34 @@ class GameLogic extends ChangeNotifier {
   GameLogic({required this.boardUnitsValues, required this.freeBoardUnits});
   void restartGame() {
     freeBoardUnits.clear();
+    freeBoardUnits = [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ];
     boardUnitsValues.clear();
+    boardUnitsValues = [
+      BoardUnitValue.empty,
+      BoardUnitValue.empty,
+      BoardUnitValue.empty,
+      BoardUnitValue.empty,
+      BoardUnitValue.empty,
+      BoardUnitValue.empty,
+      BoardUnitValue.empty,
+      BoardUnitValue.empty,
+      BoardUnitValue.empty
+    ];
+
     computerMoves.clear();
     userMoves.clear();
     showAlert = false;
+    isComputerThinking = false;
     notifyListeners();
   }
 
@@ -85,14 +109,6 @@ class GameLogic extends ChangeNotifier {
     return userChoice;
   }
 
-  void resetBoard() {
-    boardUnitsValues.clear();
-    freeBoardUnits.clear();
-    userMoves.clear();
-    computerMoves.clear();
-    notifyListeners();
-  }
-
   void setUserChoice(BoardUnitValue value) {
     userChoice = value;
     notifyListeners();
@@ -112,14 +128,17 @@ class GameLogic extends ChangeNotifier {
       print(GameState.userWin);
       state = GameState.userWin;
       showAlert = true;
+      notifyListeners();
     } else if (isLose()) {
       print(GameState.userLose);
       state = GameState.userLose;
       showAlert = true;
+      notifyListeners();
     } else if (isEven()) {
       print(GameState.even);
       state = GameState.even;
       showAlert = true;
+      notifyListeners();
     } else {
       print(GameState.playing);
       state = GameState.playing;
