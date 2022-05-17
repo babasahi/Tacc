@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.blueAccent.shade700,
                     fontSize: 32,
-                    fontFamily: 'Ubuntu',
+                    fontFamily: 'Nunito',
                     fontWeight: FontWeight.w500),
               ),
             ),

@@ -12,151 +12,64 @@ class WhoAreWe extends StatelessWidget {
             destination: GameBoardPage(),
           )),
       body: SafeArea(
-        child: Container(
-          child: ListView(
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 45.0),
-                  child: Text(
-                    'Telmidi',
-                    style: TextStyle(
-                      fontFamily: 'Ubuntu',
-                      fontSize: 54,
-                      fontWeight: FontWeight.bold,
-                    ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 60,
+                  backgroundImage: AssetImage('assets/images/saleh.jpg'),
+                ),
+                SizedBox(height: 12),
+                Text(
+                  'Babe Saleh Mahfoud',
+                  style: TextStyle(
+                    fontFamily: 'Ubuntu',
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 20,
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 38),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        radius: 60,
-                        backgroundImage: AssetImage('assets/images/saleh.jpg'),
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Text(
-                        'Babe Saleh Mahfoud',
-                        style: TextStyle(
-                          fontFamily: 'Nunito',
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
-                  ),
+              ],
+            ),
+            Column(
+              children: [
+                Text(
+                  'Contact Me',
+                  style: TextStyle(fontFamily: 'Source Sans Pro', fontSize: 32),
                 ),
-              ),
-              SizedBox(
-                height: 60,
-              ),
-              Container(
-                margin: EdgeInsets.all(12),
-                child: Column(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
-                      '',
-                      style: TextStyle(
-                        fontFamily: 'Inconsolata',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                      textAlign: TextAlign.justify,
-                    ),
-                    SizedBox(
-                      height: 68,
-                    ),
-                    Text(
-                      '',
-                      style: TextStyle(
-                        fontFamily: 'Inconsolata',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                      textAlign: TextAlign.justify,
-                    ),
-                    SizedBox(
-                      height: 68,
-                    ),
-                    Text(
-                      '',
-                      style: TextStyle(
-                        fontFamily: 'Inconsolata',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                      textAlign: TextAlign.justify,
-                    ),
-                    SizedBox(
-                      height: 68,
-                    ),
-                    Text(
-                      '',
-                      style: TextStyle(
-                        fontFamily: 'Inconsolata',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                      textAlign: TextAlign.justify,
+                    Icon(Icons.),
+                    Icon(Icons.language),
+                    Icon(Icons.email),
+                    Icon(
+                      Icons.phone,
                     ),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 60,
-              ),
-              Column(
-                children: [
-                  Text(
-                    'Contact Us',
-                    style:
-                        TextStyle(fontFamily: 'Source Sans Pro', fontSize: 32),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Icon(Icons.facebook),
-                      Icon(Icons.language),
-                      Icon(Icons.email),
-                      Icon(
-                        Icons.phone,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 70,
-                  ),
-                  Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 6.0),
-                      child: Text(
-                        'All Rights Reserved, Telmidi 2021.',
-                        style: TextStyle(
-                          fontFamily: 'Ubuntu',
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
+                SizedBox(
+                  height: 70,
+                ),
+                Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 6.0),
+                    child: Text(
+                      'All Rights Reserved, Telmidi 2021.',
+                      style: TextStyle(
+                        fontFamily: 'Ubuntu',
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
