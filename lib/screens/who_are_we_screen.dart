@@ -3,9 +3,13 @@ import 'package:tic_tac_toe/components/common.dart';
 import 'package:tic_tac_toe/screens/board_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-final Uri linkedin = Uri.parse('https://flutter.dev');
-final Uri email = Uri.parse('https://flutter.dev');
-final Uri portfolio = Uri.parse('https://flutter.dev');
+final Uri linkedin =
+    Uri.parse('https://linkedin.com/in/babe-saleh-mahfoud-519b52200/');
+final Uri email = Uri.parse(
+    'mailto:babesalehmahfoud@gmail.com?subject=Hello%20From%20Tacc&body=New%20plugin');
+
+final Uri portfolio = Uri.parse('https://babe-saleh-mahfoud.github.io');
+final Uri telephone = Uri.parse('tel:+222-31048116');
 
 class WhoAreWe extends StatelessWidget {
   void launch(Uri url) async {
@@ -49,6 +53,9 @@ class WhoAreWe extends StatelessWidget {
                   'Contact Me',
                   style: TextStyle(fontFamily: 'Source Sans Pro', fontSize: 32),
                 ),
+                SizedBox(
+                  height: 30,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -57,37 +64,36 @@ class WhoAreWe extends StatelessWidget {
                         launch(linkedin);
                       },
                       child: Image(
-                          height: 22,
-                          width: 22,
-                          color: Colors.red,
+                          height: 32,
+                          width: 32,
                           image: AssetImage('assets/images/linked.png')),
                     ),
                     GestureDetector(
                         onTap: () {
                           launch(portfolio);
                         },
-                        child: Icon(Icons.language)),
-                    Icon(Icons.email),
-                    Icon(
-                      Icons.phone,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 70,
-                ),
-                Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 6.0),
-                    child: Text(
-                      'All Rights Reserved, Telmidi 2021.',
-                      style: TextStyle(
-                        fontFamily: 'Ubuntu',
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
+                        child: Icon(
+                          Icons.language,
+                          size: 32,
+                          color: Colors.blue.withOpacity(1),
+                        )),
+                    GestureDetector(
+                      onTap: () => launch(email),
+                      child: Icon(
+                        Icons.email,
+                        size: 32,
+                        color: Colors.blue.withOpacity(1),
                       ),
                     ),
-                  ),
+                    GestureDetector(
+                      onTap: (() => launch(telephone)),
+                      child: Icon(
+                        Icons.phone,
+                        size: 32,
+                        color: Colors.blue.withOpacity(1),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
