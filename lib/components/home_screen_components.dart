@@ -132,12 +132,15 @@ class ScorWidget extends StatefulWidget {
 class _ScorWidgetState extends State<ScorWidget> {
   String getLabel() {
     if (Provider.of<GameLogic>(context).checkState() == GameState.userWin) {
-      return 'You Won !';
+      return 'You Won 👌';
     } else if (Provider.of<GameLogic>(context, listen: false).checkState() ==
         GameState.userLose) {
-      return 'You Lost ';
+      return 'You Lost 🤕';
+    } else if (Provider.of<GameLogic>(context, listen: false).checkState() ==
+        GameState.even) {
+      return 'You are even 🤝';
     } else {
-      return 'Playing ..';
+      return 'Playing ...';
     }
   }
 
@@ -220,23 +223,30 @@ class _PlayAgainState extends State<PlayAgain> {
   @override
   Widget build(BuildContext context) {
     return Provider.of<GameLogic>(context, listen: false).getShowAlert()
-        ? GestureDetector(
-            onTap: () {
-              Provider.of<GameLogic>(context, listen: false).restartGame();
-              setState(() {});
-            },
-            child: Container(
-              margin: EdgeInsets.only(bottom: 8),
-              decoration: BoxDecoration(
-                  color: Colors.greenAccent.withOpacity(0.8),
-                  borderRadius: BorderRadius.all(Radius.circular(12))),
-              padding: EdgeInsets.all(8),
-              child: Text(
-                'Play again !',
-                style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
+        ? Container(
+            margin: EdgeInsets.only(bottom: 8),
+            child: GestureDetector(
+              onTap: () {
+                Provider.of<GameLogic>(context, listen: false).restartGame();
+                setState(() {});
+              },
+              child: Material(
+                elevation: 8,
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 0),
+                  decoration: BoxDecoration(
+                      color: Colors.greenAccent.withOpacity(0.8),
+                      borderRadius: BorderRadius.all(Radius.circular(12))),
+                  padding: EdgeInsets.all(8),
+                  child: Text(
+                    'Play again !',
+                    style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
+                ),
               ),
             ),
           )
