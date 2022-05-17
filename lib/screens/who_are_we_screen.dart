@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/components/common.dart';
 import 'package:tic_tac_toe/screens/board_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final Uri linkedin = Uri.parse('https://flutter.dev');
 final Uri email = Uri.parse('https://flutter.dev');
 final Uri portfolio = Uri.parse('https://flutter.dev');
 
 class WhoAreWe extends StatelessWidget {
+  void launch(Uri url) async {
+    if (!await launchUrl(url)) throw 'Could not launch $url';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,14 +52,21 @@ class WhoAreWe extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Image(
-                        height: 22,
-                        width: 22,
-                        color: Colors.red,
-                        image: AssetImage(
-                          'assets/images/linked.png',
-                        )),
-                    Icon(Icons.language),
+                    GestureDetector(
+                      onTap: () {
+                        launch(linkedin);
+                      },
+                      child: Image(
+                          height: 22,
+                          width: 22,
+                          color: Colors.red,
+                          image: AssetImage('assets/images/linked.png')),
+                    ),
+                    GestureDetector(
+                        onTap: () {
+                          launch(portfolio);
+                        },
+                        child: Icon(Icons.language)),
                     Icon(Icons.email),
                     Icon(
                       Icons.phone,
