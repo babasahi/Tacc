@@ -83,6 +83,8 @@ class GameLogic extends ChangeNotifier {
   }
 
   Future<void> computerPlay() async {
+    isComputerThinking = true;
+    print('Computer playing .. ');
     BoardUnitValue computerChoice;
     if (userChoice == BoardUnitValue.o) {
       computerChoice = BoardUnitValue.x;
@@ -91,17 +93,19 @@ class GameLogic extends ChangeNotifier {
     }
     if (stillPlaying()) {
       int random = getRandomPlay();
-      print('Computer playing .. ');
-      isComputerThinking = true;
+
       await Future.delayed(Duration(milliseconds: 400));
       freeBoardUnits[random] = true;
       boardUnitsValues[random] = computerChoice;
       computerMoves.add(random);
-      checkState();
-      notifyListeners();
+
       print('Computer played');
       print(boardUnitsValues);
+
+      checkState();
       isComputerThinking = false;
+
+      notifyListeners();
     }
   }
 
