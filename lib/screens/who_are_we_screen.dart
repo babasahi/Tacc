@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/components/common.dart';
+import 'package:tic_tac_toe/constants.dart';
 import 'package:tic_tac_toe/screens/board_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -20,7 +21,10 @@ class WhoAreWe extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.teal,
+          elevation: 1,
+          backgroundColor: Theme.of(context).backgroundColor,
+          title: Text('Tacc', style: kAppTitleStyle),
+          centerTitle: true,
           leading: ReturnIcon(
             destination: GameBoardPage(),
           )),

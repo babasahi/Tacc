@@ -100,38 +100,3 @@ class _GameBoardPageState extends State<GameBoardPage> {
     );
   }
 }
-
-class PlayAgain extends StatefulWidget {
-  const PlayAgain({Key? key}) : super(key: key);
-
-  @override
-  State<PlayAgain> createState() => _PlayAgainState();
-}
-
-class _PlayAgainState extends State<PlayAgain> {
-  @override
-  Widget build(BuildContext context) {
-    return Provider.of<GameLogic>(context, listen: false).getShowAlert()
-        ? GestureDetector(
-            onTap: () {
-              Provider.of<GameLogic>(context, listen: false).restartGame();
-              setState(() {});
-            },
-            child: Container(
-              margin: EdgeInsets.only(bottom: 8),
-              decoration: BoxDecoration(
-                  color: Colors.greenAccent.withOpacity(0.8),
-                  borderRadius: BorderRadius.all(Radius.circular(12))),
-              padding: EdgeInsets.all(8),
-              child: Text(
-                'Play again !',
-                style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
-            ),
-          )
-        : SizedBox();
-  }
-}

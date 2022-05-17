@@ -8,7 +8,8 @@ class ReturnIcon extends StatelessWidget {
     return GestureDetector(
       child: Icon(
         Icons.arrow_back,
-        size: 30,
+        color: Colors.black,
+        size: 34,
       ),
       onTap: () {
         Navigator.push(
