@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/components/board.dart';
+import 'package:tic_tac_toe/components/common.dart';
 import 'package:tic_tac_toe/components/home_screen_components.dart';
 import 'package:tic_tac_toe/constants.dart';
+import 'package:tic_tac_toe/screens/home_screen.dart';
 import 'package:tic_tac_toe/screens/who_are_we_screen.dart';
 import 'package:tic_tac_toe/services/game_logic_provider.dart';
 
@@ -39,6 +41,7 @@ class _GameBoardPageState extends State<GameBoardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: ReturnIcon(destination: HomePage()),
         elevation: 1,
         backgroundColor: Theme.of(context).backgroundColor,
         title: Text('Tacc', style: kAppTitleStyle),

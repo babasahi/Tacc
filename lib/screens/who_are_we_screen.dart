@@ -1,27 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/screens/home_screen.dart';
+import 'package:tic_tac_toe/components/common.dart';
+import 'package:tic_tac_toe/screens/board_screen.dart';
 
 class WhoAreWe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.teal,
-        leading: GestureDetector(
-          child: Icon(
-            Icons.arrow_back,
-            size: 30,
-          ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomePage(),
-              ),
-            );
-          },
-        ),
-      ),
+          backgroundColor: Colors.teal,
+          leading: ReturnIcon(
+            destination: GameBoardPage(),
+          )),
       body: SafeArea(
         child: Container(
           child: ListView(
@@ -49,23 +38,22 @@ class WhoAreWe extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                         CircleAvatar(
-                            radius: 60,
-                            backgroundImage:
-                                AssetImage('assets/images/saleh.jpg'),
-                          ),
+                      CircleAvatar(
+                        radius: 60,
+                        backgroundImage: AssetImage('assets/images/saleh.jpg'),
+                      ),
                       SizedBox(
                         height: 12,
                       ),
                       Text(
-                            'Babe Saleh Mahfoud',
-                            style: TextStyle(
-                              fontFamily: 'Nunito',
-                              fontWeight: FontWeight.bold,
-                              fontStyle: FontStyle.italic,
-                              fontSize: 20,
-                            ),
-                          ),
+                        'Babe Saleh Mahfoud',
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 20,
+                        ),
+                      ),
                     ],
                   ),
                 ),
