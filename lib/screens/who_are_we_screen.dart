@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/components/common.dart';
 import 'package:tic_tac_toe/screens/board_screen.dart';
 
+final Uri linkedin = Uri.parse('https://flutter.dev');
+final Uri email = Uri.parse('https://flutter.dev');
+final Uri portfolio = Uri.parse('https://flutter.dev');
+
 class WhoAreWe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -43,7 +47,13 @@ class WhoAreWe extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Icon(Icons.),
+                    Image(
+                        height: 22,
+                        width: 22,
+                        color: Colors.red,
+                        image: AssetImage(
+                          'assets/images/linked.png',
+                        )),
                     Icon(Icons.language),
                     Icon(Icons.email),
                     Icon(

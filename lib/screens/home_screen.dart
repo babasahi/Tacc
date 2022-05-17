@@ -12,7 +12,6 @@ class HomePage extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(22),
           decoration: BoxDecoration(
-            color: Colors.red,
             image: DecorationImage(
                 fit: BoxFit.fill,
                 image: AssetImage('assets/images/background.jpg')),
