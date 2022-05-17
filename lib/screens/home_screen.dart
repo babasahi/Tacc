@@ -31,8 +31,12 @@ class HomePage extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(12)),
               ),
               child: Text(
-                'Play Now !',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                'Play Now',
+                style: TextStyle(
+                    color: Colors.blueAccent.shade700,
+                    fontSize: 32,
+                    fontFamily: 'Ubuntu',
+                    fontWeight: FontWeight.w500),
               ),
             ),
           ),
