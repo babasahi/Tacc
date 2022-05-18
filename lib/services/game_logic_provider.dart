@@ -98,13 +98,10 @@ class GameLogic extends ChangeNotifier {
       freeBoardUnits[random] = true;
       boardUnitsValues[random] = computerChoice;
       computerMoves.add(random);
-
       print('Computer played');
       print(boardUnitsValues);
-
       checkState();
       isComputerThinking = false;
-
       notifyListeners();
     }
   }

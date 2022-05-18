@@ -130,19 +130,17 @@ class ScorWidget extends StatefulWidget {
 }
 
 class _ScorWidgetState extends State<ScorWidget> {
+  String label = 'Playing ...';
   String getLabel() {
-    if (Provider.of<GameLogic>(context, listen: false).checkState() ==
-        GameState.userWin) {
+    if (Provider.of<GameLogic>(context).checkState() == GameState.userWin) {
       return 'You Won 👌';
-    } else if (Provider.of<GameLogic>(context, listen: false).checkState() ==
+    } else if (Provider.of<GameLogic>(context).checkState() ==
         GameState.userLose) {
       return 'You Lost 🤕';
-    } else if (Provider.of<GameLogic>(context, listen: false).checkState() ==
-        GameState.even) {
+    } else if (Provider.of<GameLogic>(context).checkState() == GameState.even) {
       return 'You are even 🤝';
-    } else {
-      return 'Playing ...';
-    }
+    } else
+      return label;
   }
 
   @override
