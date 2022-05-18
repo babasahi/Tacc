@@ -1,7 +1,9 @@
+
 ### Preview 
-             |  Screenshots                | 
-:-------------------------:|:-------------------------: 
-![Screenshot 1](screenshots/image2.png)  |  ![Screenshot 2](screenshots/image3.png)
+
+                    |  Screenshots
+:-------------------------:|:-------------------------:
+![Screenshot 1](screenshots/image1.png)  |  ![Screenshot 2](screenshots/image2.png)
 
 ---
 <div align='center'>
