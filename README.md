@@ -1,5 +1,9 @@
-![Tacc](thumbnail.png)
+### Preview 
+             |  Screenshots                | 
+:-------------------------:|:-------------------------: |:-------------------------:
+![Screenshot 1](screenshots/image1.png)  |  ![Screenshot 2](screenshots/image2.png) |  ![Screenshot 3](screenshots/image3.png)
 
+---
 <div align='center'>
   
 <a href='https://github.com/babe-saleh-mahfoud/Tacc/releases'>
