@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/constants.dart';
 import 'package:tic_tac_toe/services/game_logic_provider.dart';
+import 'package:tic_tac_toe/services/sound_seffects_provider.dart';
 
 class PlayerPicker extends StatefulWidget {
   @override
@@ -133,6 +134,8 @@ class _ScorWidgetState extends State<ScorWidget> {
   String label = 'Playing ...';
   String getLabel() {
     if (Provider.of<GameLogic>(context).checkState() == GameState.userWin) {
+      Provider.of<GameSounds>(context, listen: false).win();
+
       return 'You Won 👌';
     } else if (Provider.of<GameLogic>(context).checkState() ==
         GameState.userLose) {
@@ -187,6 +190,7 @@ class _BoardUnitWidgetState extends State<BoardUnitWidget> {
     return GestureDetector(
       onTap: () {
         setState(() {
+          Provider.of<GameSounds>(context, listen: false).buttonClick();
           Provider.of<GameLogic>(context, listen: false).userPlay(widget.index);
         });
       },
