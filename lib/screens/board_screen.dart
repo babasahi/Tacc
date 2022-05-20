@@ -8,6 +8,7 @@ import 'package:tic_tac_toe/constants.dart';
 import 'package:tic_tac_toe/screens/home_screen.dart';
 import 'package:tic_tac_toe/screens/who_are_we_screen.dart';
 import 'package:tic_tac_toe/services/game_logic_provider.dart';
+import 'package:tic_tac_toe/services/sound_seffects_provider.dart';
 
 class GameBoardPage extends StatefulWidget {
   @override
@@ -40,29 +41,31 @@ class _GameBoardPageState extends State<GameBoardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: ReturnIcon(destination: HomePage()),
-        elevation: 1,
-        backgroundColor: Theme.of(context).backgroundColor,
-        title: Text('Tacc', style: kAppTitleStyle),
-        centerTitle: true,
-        actions: [
-          Container(
-            padding: EdgeInsets.all(6),
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => WhoAreWe()));
-                });
-              },
-              child: Icon(Icons.info, size: 30, color: Colors.black),
-            ),
-          )
-        ],
-      ),
-      body: ChangeNotifierProvider<GameLogic>(
-          create: (context) => GameLogic(boardUnitsValues: [
+        appBar: AppBar(
+          leading: ReturnIcon(destination: HomePage()),
+          elevation: 1,
+          backgroundColor: Theme.of(context).backgroundColor,
+          title: Text('Tacc', style: kAppTitleStyle),
+          centerTitle: true,
+          actions: [
+            Container(
+              padding: EdgeInsets.all(6),
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => WhoAreWe()));
+                  });
+                },
+                child: Icon(Icons.info, size: 30, color: Colors.black),
+              ),
+            )
+          ],
+        ),
+        body: MultiProvider(
+          providers: [
+            ChangeNotifierProvider<GameLogic>(
+              create: (context) => GameLogic(boardUnitsValues: [
                 BoardUnitValue.empty,
                 BoardUnitValue.empty,
                 BoardUnitValue.empty,
@@ -83,20 +86,25 @@ class _GameBoardPageState extends State<GameBoardPage> {
                 false,
                 false
               ]),
+            ),
+            ChangeNotifierProvider(
+              create: (context) => GameSounds(),
+            )
+          ],
           builder: (context, child) => SafeArea(
-                child: Container(
-                  color: Theme.of(context).backgroundColor,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      PlayerPicker(),
-                      ScorWidget(),
-                      TheBoard(),
-                      PlayAgain(),
-                    ],
-                  ),
-                ),
-              )),
-    );
+            child: Container(
+              color: Theme.of(context).backgroundColor,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  PlayerPicker(),
+                  ScorWidget(),
+                  TheBoard(),
+                  PlayAgain(),
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 }

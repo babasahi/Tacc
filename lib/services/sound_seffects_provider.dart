@@ -1,10 +1,14 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
-class SoundEffects extends ChangeNotifier {
+class GameSounds extends ChangeNotifier {
   final AudioCache player = AudioCache();
 
-  void playSound() {
-    player.play('fileName');
+  void win() {
+    player.play('assets/sounds/win.wav');
+  }
+
+  void buttonClick() {
+    player.play('assets/sounds/click.wav');
   }
 }
