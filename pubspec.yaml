@@ -21,6 +21,7 @@ dependencies:
   flutter_svg: ^1.0.3
   url_launcher: ^6.1.2
   flutter_launcher_icons: ^0.9.2
+  audioplayers: ^0.20.1
 
 dev_dependencies:
   flutter_test:
