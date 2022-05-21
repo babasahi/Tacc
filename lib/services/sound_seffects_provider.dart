@@ -9,6 +9,6 @@ class GameSounds extends ChangeNotifier {
   }
 
   void buttonClick() {
-    player.play('sounds/click.wav');
+    player.play('sounds/button.wav');
   }
 }
