@@ -5,10 +5,10 @@ class GameSounds extends ChangeNotifier {
   final AudioCache player = AudioCache();
 
   void win() {
-    player.play('assets/sounds/win.wav');
+    player.play('sounds/win.wav');
   }
 
   void buttonClick() {
-    player.play('assets/sounds/click.wav');
+    player.play('sounds/click.wav');
   }
 }
