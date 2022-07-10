@@ -19,6 +19,7 @@ class GameLogic extends ChangeNotifier {
   bool showAlert = false;
 
   GameLogic({required this.boardUnitsValues, required this.freeBoardUnits});
+
   void restartGame() {
     freeBoardUnits.clear();
     freeBoardUnits = [

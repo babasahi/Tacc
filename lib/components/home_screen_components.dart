@@ -64,10 +64,13 @@ class _PlayerPickerState extends State<PlayerPicker> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        if (!isX) {
-                          isX = true;
-                          Provider.of<GameLogic>(context, listen: false)
-                              .setUserChoice(BoardUnitValue.x);
+                        if (!Provider.of<GameLogic>(context, listen: false)
+                            .stillPlaying()) {
+                          if (!isX) {
+                            isX = true;
+                            Provider.of<GameLogic>(context, listen: false)
+                                .setUserChoice(BoardUnitValue.x);
+                          }
                         }
                       });
                     },
@@ -92,10 +95,13 @@ class _PlayerPickerState extends State<PlayerPicker> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        if (isX) {
-                          isX = false;
-                          Provider.of<GameLogic>(context, listen: false)
-                              .setUserChoice(BoardUnitValue.o);
+                        if (!Provider.of<GameLogic>(context, listen: false)
+                            .stillPlaying()) {
+                          if (isX) {
+                            isX = false;
+                            Provider.of<GameLogic>(context, listen: false)
+                                .setUserChoice(BoardUnitValue.o);
+                          }
                         }
                       });
                     },
