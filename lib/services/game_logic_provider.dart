@@ -12,13 +12,22 @@ enum BoardUnitValue { x, o, empty }
 class GameLogic extends ChangeNotifier {
   List<bool> freeBoardUnits = [];
   BoardUnitValue userChoice = BoardUnitValue.o;
-  bool isComputerThinking = false;
+  bool _isComputerThinking = false;
   List<BoardUnitValue> boardUnitsValues = [];
   List<int> userMoves = [];
   List<int> computerMoves = [];
-  bool showAlert = false;
+  bool _showAlert = false;
+  bool _isX = false;
 
   GameLogic({required this.boardUnitsValues, required this.freeBoardUnits});
+
+  bool get isComputerThinking => _isComputerThinking;
+  bool get isX => _isX;
+  bool get showAlert => _showAlert;
+  void setIsX(bool value) {
+    _isX = value;
+    notifyListeners();
+  }
 
   void restartGame() {
     freeBoardUnits.clear();
@@ -48,14 +57,13 @@ class GameLogic extends ChangeNotifier {
 
     computerMoves.clear();
     userMoves.clear();
-    showAlert = false;
-    isComputerThinking = false;
+    _showAlert = false;
+    _isComputerThinking = false;
     notifyListeners();
   }
 
   int getRandomPlay() {
     List<int> avalaibles = [];
-
     for (var i = 0; i < freeBoardUnits.length; i++) {
       if (!freeBoardUnits[i]) {
         avalaibles.add(i);
@@ -63,7 +71,6 @@ class GameLogic extends ChangeNotifier {
     }
 
     if (avalaibles.length > 0) {
-      // to get random numbers
       avalaibles.shuffle();
       return avalaibles.last;
     } else {
@@ -84,7 +91,7 @@ class GameLogic extends ChangeNotifier {
   }
 
   Future<void> computerPlay() async {
-    isComputerThinking = true;
+    _isComputerThinking = true;
     print('Computer playing .. ');
     BoardUnitValue computerChoice;
     if (userChoice == BoardUnitValue.o) {
@@ -102,7 +109,7 @@ class GameLogic extends ChangeNotifier {
       print('Computer played');
       print(boardUnitsValues);
       checkState();
-      isComputerThinking = false;
+      _isComputerThinking = false;
       notifyListeners();
     }
   }
@@ -116,30 +123,22 @@ class GameLogic extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool getIsComputerThinking() {
-    return isComputerThinking;
-  }
-
-  bool getShowAlert() {
-    return showAlert;
-  }
-
   GameState checkState() {
     GameState state;
     if (isWin()) {
       print(GameState.userWin);
       state = GameState.userWin;
-      showAlert = true;
+      _showAlert = true;
       notifyListeners();
     } else if (isLose()) {
       print(GameState.userLose);
       state = GameState.userLose;
-      showAlert = true;
+      _showAlert = true;
       notifyListeners();
     } else if (isEven()) {
       print(GameState.even);
       state = GameState.even;
-      showAlert = true;
+      _showAlert = true;
       notifyListeners();
     } else {
       print(GameState.playing);

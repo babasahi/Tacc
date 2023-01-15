@@ -10,8 +10,6 @@ class PlayerPicker extends StatefulWidget {
 }
 
 class _PlayerPickerState extends State<PlayerPicker> {
-  bool isX = false;
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -66,8 +64,8 @@ class _PlayerPickerState extends State<PlayerPicker> {
                       setState(() {
                         if (!Provider.of<GameLogic>(context, listen: false)
                             .stillPlaying()) {
-                          if (!isX) {
-                            isX = true;
+                          if (!Provider.of<GameLogic>(context, listen: false)
+                              .isX) {
                             Provider.of<GameLogic>(context, listen: false)
                                 .setUserChoice(BoardUnitValue.x);
                           }
@@ -80,7 +78,10 @@ class _PlayerPickerState extends State<PlayerPicker> {
                           bottomLeft: Radius.circular(14),
                           topLeft: Radius.circular(14),
                         ),
-                        color: isX ? selectedColor : unSelectedColor,
+                        color:
+                            Provider.of<GameLogic>(context, listen: false).isX
+                                ? selectedColor
+                                : unSelectedColor,
                       ),
                       child: Center(
                         child: Text(
@@ -97,8 +98,8 @@ class _PlayerPickerState extends State<PlayerPicker> {
                       setState(() {
                         if (!Provider.of<GameLogic>(context, listen: false)
                             .stillPlaying()) {
-                          if (isX) {
-                            isX = false;
+                          if (Provider.of<GameLogic>(context, listen: false)
+                              .isX) {
                             Provider.of<GameLogic>(context, listen: false)
                                 .setUserChoice(BoardUnitValue.o);
                           }
@@ -111,7 +112,10 @@ class _PlayerPickerState extends State<PlayerPicker> {
                           bottomRight: Radius.circular(14),
                           topRight: Radius.circular(14),
                         ),
-                        color: isX ? unSelectedColor : selectedColor,
+                        color:
+                            Provider.of<GameLogic>(context, listen: false).isX
+                                ? unSelectedColor
+                                : selectedColor,
                       ),
                       child: Center(
                         child: Text(
@@ -235,7 +239,7 @@ class _PlayAgainState extends State<PlayAgain> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 8),
-      child: Provider.of<GameLogic>(context).getShowAlert()
+      child: Provider.of<GameLogic>(context).showAlert
           ? GestureDetector(
               onTap: () {
                 Provider.of<GameLogic>(context, listen: false).restartGame();

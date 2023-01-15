@@ -17,7 +17,7 @@ class GameBoardPage extends StatefulWidget {
 
 class _GameBoardPageState extends State<GameBoardPage> {
   Widget showModal() {
-    Provider.of<GameLogic>(context, listen: false).getShowAlert()
+    Provider.of<GameLogic>(context, listen: false).showAlert
         ? showMaterialModalBottomSheet(
             context: context,
             builder: (context) {
@@ -33,9 +33,7 @@ class _GameBoardPageState extends State<GameBoardPage> {
               );
             })
         : print('');
-    return SizedBox(
-      height: 0,
-    );
+    return SizedBox(height: 0);
   }
 
   @override
