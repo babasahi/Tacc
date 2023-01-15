@@ -123,6 +123,16 @@ class GameLogic extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool hasAlreadyPlayed() {
+    bool hasPlayed = false;
+    for (var i = 0; i < freeBoardUnits.length; i++) {
+      if (freeBoardUnits[i]) {
+        hasPlayed = true;
+      }
+    }
+    return hasPlayed;
+  }
+
   GameState checkState() {
     GameState state;
     if (isWin()) {

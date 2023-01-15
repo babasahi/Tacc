@@ -61,16 +61,13 @@ class _PlayerPickerState extends State<PlayerPicker> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      setState(() {
-                        if (!Provider.of<GameLogic>(context, listen: false)
-                            .stillPlaying()) {
-                          if (!Provider.of<GameLogic>(context, listen: false)
-                              .isX) {
-                            Provider.of<GameLogic>(context, listen: false)
-                                .setUserChoice(BoardUnitValue.x);
-                          }
-                        }
-                      });
+                      if (!Provider.of<GameLogic>(context, listen: false)
+                          .hasAlreadyPlayed()) {
+                        Provider.of<GameLogic>(context, listen: false)
+                            .setUserChoice(BoardUnitValue.x);
+                        Provider.of<GameLogic>(context, listen: false)
+                            .setIsX(true);
+                      }
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -78,10 +75,9 @@ class _PlayerPickerState extends State<PlayerPicker> {
                           bottomLeft: Radius.circular(14),
                           topLeft: Radius.circular(14),
                         ),
-                        color:
-                            Provider.of<GameLogic>(context, listen: false).isX
-                                ? selectedColor
-                                : unSelectedColor,
+                        color: Provider.of<GameLogic>(context).isX
+                            ? selectedColor
+                            : unSelectedColor,
                       ),
                       child: Center(
                         child: Text(
@@ -95,16 +91,13 @@ class _PlayerPickerState extends State<PlayerPicker> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      setState(() {
-                        if (!Provider.of<GameLogic>(context, listen: false)
-                            .stillPlaying()) {
-                          if (Provider.of<GameLogic>(context, listen: false)
-                              .isX) {
-                            Provider.of<GameLogic>(context, listen: false)
-                                .setUserChoice(BoardUnitValue.o);
-                          }
-                        }
-                      });
+                      if (!Provider.of<GameLogic>(context, listen: false)
+                          .hasAlreadyPlayed()) {
+                        Provider.of<GameLogic>(context, listen: false)
+                            .setUserChoice(BoardUnitValue.o);
+                        Provider.of<GameLogic>(context, listen: false)
+                            .setIsX(false);
+                      }
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -112,10 +105,9 @@ class _PlayerPickerState extends State<PlayerPicker> {
                           bottomRight: Radius.circular(14),
                           topRight: Radius.circular(14),
                         ),
-                        color:
-                            Provider.of<GameLogic>(context, listen: false).isX
-                                ? unSelectedColor
-                                : selectedColor,
+                        color: Provider.of<GameLogic>(context).isX
+                            ? unSelectedColor
+                            : selectedColor,
                       ),
                       child: Center(
                         child: Text(
