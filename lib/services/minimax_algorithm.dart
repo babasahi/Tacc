@@ -3,11 +3,11 @@ import 'package:tic_tac_toe/services/game_logic_provider.dart';
 
 class MinimaxAlgorithm {
   int minimax(GameBoard gameBoard, int depth, bool isMaximizing) {
-    if (gameBoard.getGameState() == GameState.userWin) {
+    if (gameBoard.gameState == GameState.userWin) {
       return 10;
-    } else if (gameBoard.getGameState() == GameState.userLose) {
+    } else if (gameBoard.gameState == GameState.userLose) {
       return -10;
-    } else if (gameBoard.getGameState() == GameState.even) {
+    } else if (gameBoard.gameState == GameState.even) {
       return 0;
     }
 

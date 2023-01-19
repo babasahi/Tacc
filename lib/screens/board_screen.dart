@@ -62,8 +62,8 @@ class _GameBoardPageState extends State<GameBoardPage> {
         ),
         body: MultiProvider(
           providers: [
-            ChangeNotifierProvider<GameLogic>(
-              create: (context) => GameLogic(),
+            ChangeNotifierProvider<GameBoard>(
+              create: (context) => GameBoard(),
             ),
             ChangeNotifierProvider(
               create: (context) => GameSounds(),

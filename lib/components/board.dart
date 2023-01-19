@@ -13,7 +13,7 @@ class _TheBoardState extends State<TheBoard> {
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.all(10),
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 9),
+        margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(
             Radius.circular(24),

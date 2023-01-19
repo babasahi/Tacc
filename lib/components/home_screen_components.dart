@@ -19,7 +19,7 @@ class _PlayerPickerState extends State<PlayerPicker> {
           Container(
             margin: EdgeInsets.symmetric(vertical: 12),
             padding: EdgeInsets.all(6),
-            width: 140,
+            width: MediaQuery.of(context).size.width / 4,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(14),
@@ -55,8 +55,8 @@ class _PlayerPickerState extends State<PlayerPicker> {
               ),
               color: Theme.of(context).primaryColor,
             ),
-            height: 65,
-            width: 240,
+            height: MediaQuery.of(context).size.height / 12,
+            width: MediaQuery.of(context).size.width / 1.5,
             child: Row(
               children: [
                 Expanded(
@@ -195,13 +195,10 @@ class _BoardUnitWidgetState extends State<BoardUnitWidget> {
               borderRadius: BorderRadius.all(
                 Radius.circular(30),
               ),
-              border: Border.all(
-                color: Colors.black,
-                width: 2,
-              )),
+              border: Border.all(color: Colors.black, width: 2)),
           margin: EdgeInsets.all(2),
-          height: 120,
-          width: 120,
+          // height: MediaQuery.of(context).size.height / 8,
+          // width: MediaQuery.of(context).size.width / 8,
           child: Center(
             child: Text(
               getLabel(Provider.of<GameBoard>(context).gameBoard[widget.index]),
