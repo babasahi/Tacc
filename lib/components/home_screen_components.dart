@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/constants.dart';
+import 'package:tic_tac_toe/models/models.dart';
 import 'package:tic_tac_toe/services/game_logic_provider.dart';
 import 'package:tic_tac_toe/services/sound_seffects_provider.dart';
 
@@ -61,9 +62,9 @@ class _PlayerPickerState extends State<PlayerPicker> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      if (!Provider.of<GameLogic>(context, listen: false)
+                      if (!Provider.of<GameBoard>(context, listen: false)
                           .hasAlreadyPlayed()) {
-                        Provider.of<GameLogic>(context, listen: false)
+                        Provider.of<GameBoard>(context, listen: false)
                             .setIsX(true);
                       }
                     },
@@ -73,7 +74,7 @@ class _PlayerPickerState extends State<PlayerPicker> {
                           bottomLeft: Radius.circular(14),
                           topLeft: Radius.circular(14),
                         ),
-                        color: Provider.of<GameLogic>(context).isX
+                        color: Provider.of<GameBoard>(context).isX
                             ? selectedColor
                             : unSelectedColor,
                       ),
@@ -89,9 +90,9 @@ class _PlayerPickerState extends State<PlayerPicker> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      if (!Provider.of<GameLogic>(context, listen: false)
+                      if (!Provider.of<GameBoard>(context, listen: false)
                           .hasAlreadyPlayed()) {
-                        Provider.of<GameLogic>(context, listen: false)
+                        Provider.of<GameBoard>(context, listen: false)
                             .setIsX(false);
                       }
                     },
@@ -101,7 +102,7 @@ class _PlayerPickerState extends State<PlayerPicker> {
                           bottomRight: Radius.circular(14),
                           topRight: Radius.circular(14),
                         ),
-                        color: Provider.of<GameLogic>(context).isX
+                        color: Provider.of<GameBoard>(context).isX
                             ? unSelectedColor
                             : selectedColor,
                       ),
@@ -131,14 +132,14 @@ class ScorWidget extends StatefulWidget {
 class _ScorWidgetState extends State<ScorWidget> {
   String label = 'Playing ...';
   String getLabel() {
-    if (Provider.of<GameLogic>(context).gameState == GameState.userWin) {
+    if (Provider.of<GameBoard>(context).gameState == GameState.userWin) {
       Provider.of<GameSounds>(context, listen: false).win();
 
       return 'You Won 👌';
-    } else if (Provider.of<GameLogic>(context).gameState ==
+    } else if (Provider.of<GameBoard>(context).gameState ==
         GameState.userLose) {
       return 'You Lost 🤕';
-    } else if (Provider.of<GameLogic>(context).gameState == GameState.even) {
+    } else if (Provider.of<GameBoard>(context).gameState == GameState.even) {
       return 'You are even 🤝';
     } else
       return label;
@@ -171,9 +172,9 @@ class BoardUnitWidget extends StatefulWidget {
 class _BoardUnitWidgetState extends State<BoardUnitWidget> {
   String getLabel(int indexValue) {
     if (indexValue == 1) {
-      return Provider.of<GameLogic>(context, listen: false).isX ? 'X' : 'O';
+      return Provider.of<GameBoard>(context, listen: false).isX ? 'X' : 'O';
     } else if (indexValue == 2) {
-      return Provider.of<GameLogic>(context, listen: false).isX ? 'O' : 'X';
+      return Provider.of<GameBoard>(context, listen: false).isX ? 'O' : 'X';
     } else {
       return '';
     }
@@ -185,7 +186,7 @@ class _BoardUnitWidgetState extends State<BoardUnitWidget> {
       onTap: () {
         setState(() {
           Provider.of<GameSounds>(context, listen: false).buttonClick();
-          Provider.of<GameLogic>(context, listen: false).userPlay(widget.index);
+          Provider.of<GameBoard>(context, listen: false).userPlay(widget.index);
         });
       },
       child: Container(
@@ -203,7 +204,7 @@ class _BoardUnitWidgetState extends State<BoardUnitWidget> {
           width: 120,
           child: Center(
             child: Text(
-              getLabel(Provider.of<GameLogic>(context).board()[widget.index]),
+              getLabel(Provider.of<GameBoard>(context).gameBoard[widget.index]),
               style: kMainTextStyle,
             ),
           )),
@@ -226,7 +227,7 @@ class _PlayAgainState extends State<PlayAgain> {
       child: Provider.of<GameBoard>(context).showAlert
           ? GestureDetector(
               onTap: () {
-                Provider.of<GameLogic>(context, listen: false).restartGame();
+                Provider.of<GameBoard>(context, listen: false).reset();
               },
               child: Material(
                 elevation: 8,

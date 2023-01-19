@@ -3,28 +3,49 @@ import 'package:tic_tac_toe/models/models.dart';
 
 class GameBoard extends ChangeNotifier {
   final List<int> _gameBoard = List.filled(9, 0);
+  bool _isX = true;
+  GameState _gameState = GameState.playing;
 
   List<int> get gameBoard => _gameBoard;
-
-  void set(int index, int value) {
+  GameState get gameState => _gameState;
+  bool _showAlert = false;
+  void _set(int index, int value) {
     _gameBoard[index] = value;
+    _setGameState();
+    _showAlert = _isGameOver();
     notifyListeners();
   }
 
-  int get(int index) {
+  void setIsX(bool value) {
+    _isX = value;
+  }
+
+  void userPlay(index) {
+    _set(index, 1);
+  }
+
+  bool get showAlert => _showAlert;
+  bool get isX => _isX;
+
+  int _get(int index) {
     return _gameBoard[index];
   }
 
-  GameState getGameState() {
+  bool hasAlreadyPlayed() {
+    return _gameBoard.contains(1) || gameBoard.contains(2);
+  }
+
+  void _setGameState() {
     if (hasPlayerWon(1)) {
-      return GameState.userWin;
+      _gameState = GameState.userWin;
     } else if (hasPlayerWon(2)) {
-      return GameState.userLose;
+      _gameState = GameState.userLose;
     } else if (isBoardFull()) {
-      return GameState.even;
+      _gameState = GameState.even;
     } else {
-      return GameState.playing;
+      _gameState = GameState.playing;
     }
+    notifyListeners();
   }
 
   void reset() {
@@ -34,7 +55,7 @@ class GameBoard extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool isGameOver() {
+  bool _isGameOver() {
     return isBoardFull() || hasPlayerWon(1) || hasPlayerWon(2);
   }
 

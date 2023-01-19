@@ -17,7 +17,7 @@ class GameBoardPage extends StatefulWidget {
 
 class _GameBoardPageState extends State<GameBoardPage> {
   Widget showModal() {
-    Provider.of<GameLogic>(context, listen: false).showAlert
+    Provider.of<GameBoard>(context, listen: false).showAlert
         ? showMaterialModalBottomSheet(
             context: context,
             builder: (context) {
