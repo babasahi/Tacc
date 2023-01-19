@@ -64,8 +64,6 @@ class _PlayerPickerState extends State<PlayerPicker> {
                       if (!Provider.of<GameLogic>(context, listen: false)
                           .hasAlreadyPlayed()) {
                         Provider.of<GameLogic>(context, listen: false)
-                            .setUserChoice(BoardUnitValue.x);
-                        Provider.of<GameLogic>(context, listen: false)
                             .setIsX(true);
                       }
                     },
@@ -93,8 +91,6 @@ class _PlayerPickerState extends State<PlayerPicker> {
                     onTap: () {
                       if (!Provider.of<GameLogic>(context, listen: false)
                           .hasAlreadyPlayed()) {
-                        Provider.of<GameLogic>(context, listen: false)
-                            .setUserChoice(BoardUnitValue.o);
                         Provider.of<GameLogic>(context, listen: false)
                             .setIsX(false);
                       }
@@ -135,14 +131,14 @@ class ScorWidget extends StatefulWidget {
 class _ScorWidgetState extends State<ScorWidget> {
   String label = 'Playing ...';
   String getLabel() {
-    if (Provider.of<GameLogic>(context).checkState() == GameState.userWin) {
+    if (Provider.of<GameLogic>(context).gameState == GameState.userWin) {
       Provider.of<GameSounds>(context, listen: false).win();
 
       return 'You Won 👌';
-    } else if (Provider.of<GameLogic>(context).checkState() ==
+    } else if (Provider.of<GameLogic>(context).gameState ==
         GameState.userLose) {
       return 'You Lost 🤕';
-    } else if (Provider.of<GameLogic>(context).checkState() == GameState.even) {
+    } else if (Provider.of<GameLogic>(context).gameState == GameState.even) {
       return 'You are even 🤝';
     } else
       return label;
@@ -173,15 +169,11 @@ class BoardUnitWidget extends StatefulWidget {
 }
 
 class _BoardUnitWidgetState extends State<BoardUnitWidget> {
-  String getLabel() {
-    BoardUnitValue value = BoardUnitValue.empty;
-    try {
-      value = Provider.of<GameLogic>(context).boardUnitsValues[widget.index];
-    } catch (e) {}
-    if (value == BoardUnitValue.o) {
-      return 'O';
-    } else if (value == BoardUnitValue.x) {
-      return 'X';
+  String getLabel(int indexValue) {
+    if (indexValue == 1) {
+      return Provider.of<GameLogic>(context, listen: false).isX ? 'X' : 'O';
+    } else if (indexValue == 2) {
+      return Provider.of<GameLogic>(context, listen: false).isX ? 'O' : 'X';
     } else {
       return '';
     }
@@ -211,7 +203,7 @@ class _BoardUnitWidgetState extends State<BoardUnitWidget> {
           width: 120,
           child: Center(
             child: Text(
-              getLabel(),
+              getLabel(Provider.of<GameLogic>(context).board()[widget.index]),
               style: kMainTextStyle,
             ),
           )),
@@ -231,7 +223,7 @@ class _PlayAgainState extends State<PlayAgain> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 8),
-      child: Provider.of<GameLogic>(context).showAlert
+      child: Provider.of<GameBoard>(context).showAlert
           ? GestureDetector(
               onTap: () {
                 Provider.of<GameLogic>(context, listen: false).restartGame();

@@ -63,27 +63,7 @@ class _GameBoardPageState extends State<GameBoardPage> {
         body: MultiProvider(
           providers: [
             ChangeNotifierProvider<GameLogic>(
-              create: (context) => GameLogic(boardUnitsValues: [
-                BoardUnitValue.empty,
-                BoardUnitValue.empty,
-                BoardUnitValue.empty,
-                BoardUnitValue.empty,
-                BoardUnitValue.empty,
-                BoardUnitValue.empty,
-                BoardUnitValue.empty,
-                BoardUnitValue.empty,
-                BoardUnitValue.empty
-              ], freeBoardUnits: [
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false
-              ]),
+              create: (context) => GameLogic(),
             ),
             ChangeNotifierProvider(
               create: (context) => GameSounds(),
