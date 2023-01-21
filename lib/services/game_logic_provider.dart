@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/models/models.dart';
+import 'package:tic_tac_toe/services/minimax_algorithm.dart';
 
 class GameBoard extends ChangeNotifier {
-  final List<int> _gameBoard = List.filled(9, 0);
+  List<int> _gameBoard = List.filled(9, 0);
+  bool computerIsPlaying = false;
   bool _isX = true;
   GameState _gameState = GameState.playing;
-
+  MinimaxAlgorithm _minimaxAlgorithm = MinimaxAlgorithm();
   List<int> get gameBoard => _gameBoard;
   GameState get gameState => _gameState;
   bool _showAlert = false;
@@ -18,18 +20,24 @@ class GameBoard extends ChangeNotifier {
 
   void setIsX(bool value) {
     _isX = value;
+    notifyListeners();
+  }
+
+  void computerPlay() {
+    _set(_minimaxAlgorithm.findBestMove(_gameBoard, _gameState), 2);
   }
 
   void userPlay(index) {
     _set(index, 1);
+    Future.delayed(Duration(milliseconds: 500), () {
+      computerIsPlaying = true;
+      computerPlay();
+      computerIsPlaying = false;
+    });
   }
 
   bool get showAlert => _showAlert;
   bool get isX => _isX;
-
-  int _get(int index) {
-    return _gameBoard[index];
-  }
 
   bool hasAlreadyPlayed() {
     return _gameBoard.contains(1) || gameBoard.contains(2);

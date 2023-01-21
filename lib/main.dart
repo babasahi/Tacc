@@ -10,9 +10,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Tic Tac Toe Game',
         theme: ThemeData(
-            backgroundColor: secondaryColor, primaryColor: primaryColorx),
+            backgroundColor: secondaryColor, primaryColor: primaryColor),
         debugShowCheckedModeBanner: false,
         home: HomePage());
   }

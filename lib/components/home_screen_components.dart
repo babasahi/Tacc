@@ -185,8 +185,12 @@ class _BoardUnitWidgetState extends State<BoardUnitWidget> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          Provider.of<GameSounds>(context, listen: false).buttonClick();
-          Provider.of<GameBoard>(context, listen: false).userPlay(widget.index);
+          if (!Provider.of<GameBoard>(context, listen: false)
+              .computerIsPlaying) {
+            Provider.of<GameSounds>(context, listen: false).buttonClick();
+            Provider.of<GameBoard>(context, listen: false)
+                .userPlay(widget.index);
+          }
         });
       },
       child: Container(
@@ -197,8 +201,8 @@ class _BoardUnitWidgetState extends State<BoardUnitWidget> {
               ),
               border: Border.all(color: Colors.black, width: 2)),
           margin: EdgeInsets.all(2),
-          // height: MediaQuery.of(context).size.height / 8,
-          // width: MediaQuery.of(context).size.width / 8,
+          height: MediaQuery.of(context).size.width / 3.5,
+          width: MediaQuery.of(context).size.width / 3.5,
           child: Center(
             child: Text(
               getLabel(Provider.of<GameBoard>(context).gameBoard[widget.index]),
