@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
                 fit: BoxFit.fill,
-                image: AssetImage('assets/images/background.jpg')),
+                image: AssetImage('assets/images/background.jpeg')),
           ),
         ),
         GestureDetector(

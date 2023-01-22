@@ -13,7 +13,7 @@ class MinimaxAlgorithm {
       return -10;
     } else if (gameState == GameState.even) {
       return 0;
-    } else if (depth == 9) {
+    } else if (depth == 0) {
       return 0;
     }
 
@@ -48,7 +48,7 @@ class MinimaxAlgorithm {
     for (int i = 0; i < 9; i++) {
       if (gameBoard[i] == 0) {
         gameBoard[i] = 2;
-        int score = minimax(gameState, gameBoard, 0, false);
+        int score = minimax(gameState, gameBoard, 9, false);
         gameBoard[i] = 0;
         if (score > bestScore) {
           bestScore = score;
