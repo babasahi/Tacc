@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/models/models.dart';
-import 'package:tic_tac_toe/services/minimax_algorithm.dart';
 
 class GameBoard extends ChangeNotifier {
   List<int> _gameBoard = List.filled(9, 0);
   bool computerIsPlaying = false;
   bool _isX = true;
   GameState _gameState = GameState.playing;
-  MinimaxAlgorithm _minimaxAlgorithm = MinimaxAlgorithm();
   List<int> get gameBoard => _gameBoard;
   GameState get gameState => _gameState;
   bool _showAlert = false;
@@ -24,16 +22,16 @@ class GameBoard extends ChangeNotifier {
   }
 
   void computerPlay() {
-    _set(_minimaxAlgorithm.findBestMove(_gameBoard, _gameState), 2);
+    List<int> temp = List.from(_gameBoard);
+    int move = findBestMove(temp);
+    _set(move, 2);
   }
 
   void userPlay(index) {
     _set(index, 1);
-    Future.delayed(Duration(milliseconds: 500), () {
-      computerIsPlaying = true;
-      computerPlay();
-      computerIsPlaying = false;
-    });
+    computerIsPlaying = true;
+    computerPlay();
+    computerIsPlaying = false;
   }
 
   bool get showAlert => _showAlert;
@@ -68,12 +66,7 @@ class GameBoard extends ChangeNotifier {
   }
 
   bool isBoardFull() {
-    for (int i = 0; i < 9; i++) {
-      if (_gameBoard[i] == 0) {
-        return false;
-      }
-    }
-    return true;
+    return !_gameBoard.contains(0);
   }
 
   bool hasPlayerWon(int player) {
@@ -112,30 +105,60 @@ class GameBoard extends ChangeNotifier {
       return 0;
     }
   }
+
+  // Minimax Algorithm
+  int count = 0;
+  int minimax(List<int> board, int depth, bool isMax) {
+    print("Count: ${count++}");
+    int score = evaluate();
+    if (score == 10) {
+      return score - depth;
+    }
+    if (score == -10) {
+      return score + depth;
+    }
+    if (isBoardFull()) {
+      return 0;
+    }
+    if (isMax) {
+      int best = -1000;
+      for (int i = 0; i < 9; i++) {
+        if (board[i] == 0) {
+          board[i] = 2;
+          best = best > minimax(board, depth + 1, false)
+              ? best
+              : minimax(board, depth + 1, false);
+        }
+      }
+      return best;
+    } else {
+      int best = 1000;
+      for (int i = 0; i < 9; i++) {
+        if (board[i] == 0) {
+          board[i] = 1;
+          best = best < minimax(board, depth + 1, true)
+              ? best
+              : minimax(board, depth + 1, true);
+        }
+      }
+      return best;
+    }
+  }
+
+  int findBestMove(List<int> board) {
+    int bestVal = -1000;
+    int bestMove = -1;
+    for (int i = 0; i < 9; i++) {
+      if (board[i] == 0) {
+        board[i] = 2;
+        int moveVal = minimax(board, 0, false);
+        board[i] = 0;
+        if (moveVal > bestVal) {
+          bestMove = i;
+          bestVal = moveVal;
+        }
+      }
+    }
+    return bestMove;
+  }
 }
-
-
-// class GameLogic extends ChangeNotifier {
-//   GameState _gameState = GameState.playing;
-//   GameBoard _gameBoard = GameBoard();
-//   bool _isX = true;
-//   MinimaxAlgorithm _minimaxAlgorithm = MinimaxAlgorithm();
-
-//   GameState get gameState => _gameState;
-//   List<int> board() {
-//     return _gameBoard.gameBoard;
-//   }
-
-//   bool hasAlreadyPlayed() {
-//     return _gameBoard.gameBoard.contains(1) || _gameBoard.gameBoard.contains(2);
-//   }
-  
-//   void setIsX(bool isX) {
-//     _isX = isX;
-//   }
-
-//   bool get isX => _isX;
-//   void userPlay(int index) {
-//     _gameBoard.set(index, 1);
-//   }
-// }

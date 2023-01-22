@@ -201,7 +201,8 @@ class _BoardUnitWidgetState extends State<BoardUnitWidget> {
               ),
               border: Border.all(color: Colors.black, width: 2)),
           margin: EdgeInsets.all(2),
-          height: MediaQuery.of(context).size.width / 3.5,
+          //TODO: fix this
+          height: MediaQuery.of(context).size.width / 12.5,
           width: MediaQuery.of(context).size.width / 3.5,
           child: Center(
             child: Text(
