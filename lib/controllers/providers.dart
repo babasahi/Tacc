@@ -3,19 +3,30 @@ import 'package:tic_tac_toe/models/models.dart';
 
 class GameBoard extends ChangeNotifier {
   List<int> _gameBoard = List.filled(9, 0);
-  bool computerIsPlaying = false;
+  bool turn = true;
+  bool _smartMode = false;
   bool _isX = true;
   GameState _gameState = GameState.playing;
   List<int> get gameBoard => _gameBoard;
+  List<String> gameBoardString = ["", "", "", "", "", "", "", "", ""];
   GameState get gameState => _gameState;
   bool _showAlert = false;
+
+  void toggleSmartMode() {
+    _smartMode = !_smartMode;
+    notifyListeners();
+  }
+
   void _set(int index, int value) {
     _gameBoard[index] = value;
+    gameBoardString[index] =
+        value == 1 ? (_isX ? "X" : "O") : (_isX ? "O" : "X");
     _setGameState();
     _showAlert = _isGameOver();
     notifyListeners();
   }
 
+  bool get smartMode => _smartMode;
   void setIsX(bool value) {
     _isX = value;
     notifyListeners();
@@ -23,15 +34,15 @@ class GameBoard extends ChangeNotifier {
 
   void computerPlay() {
     List<int> temp = List.from(_gameBoard);
-    int move = findBestMove(temp);
+    int move = smartMode ? findBestMove(temp) : dumpAlgorithm(_gameBoard);
     _set(move, 2);
   }
 
   void userPlay(index) {
     _set(index, 1);
-    computerIsPlaying = true;
+    turn = false;
     computerPlay();
-    computerIsPlaying = false;
+    turn = true;
   }
 
   bool get showAlert => _showAlert;
@@ -104,6 +115,16 @@ class GameBoard extends ChangeNotifier {
     } else {
       return 0;
     }
+  }
+
+  // dump algorithm
+  int dumpAlgorithm(List<int> board) {
+    List<int> freeMoves = [];
+    board.forEach((element) {
+      if (element == 0) freeMoves.add(element);
+    });
+    freeMoves.shuffle();
+    return freeMoves.last;
   }
 
   // Minimax Algorithm

@@ -131,28 +131,14 @@ class BoardUnitWidget extends StatefulWidget {
 }
 
 class _BoardUnitWidgetState extends State<BoardUnitWidget> {
-  String getLabel(int indexValue) {
-    if (indexValue == 1) {
-      return Provider.of<GameBoard>(context, listen: false).isX ? 'X' : 'O';
-    } else if (indexValue == 2) {
-      return Provider.of<GameBoard>(context, listen: false).isX ? 'O' : 'X';
-    } else {
-      return '';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          if (!Provider.of<GameBoard>(context, listen: false)
-              .computerIsPlaying) {
-            Provider.of<GameSounds>(context, listen: false).buttonClick();
-            Provider.of<GameBoard>(context, listen: false)
-                .userPlay(widget.index);
-          }
-        });
+        if (Provider.of<GameBoard>(context, listen: false).turn) {
+          Provider.of<GameSounds>(context, listen: false).buttonClick();
+          Provider.of<GameBoard>(context, listen: false).userPlay(widget.index);
+        }
       },
       child: Container(
           decoration: BoxDecoration(
@@ -166,7 +152,7 @@ class _BoardUnitWidgetState extends State<BoardUnitWidget> {
           width: MediaQuery.of(context).size.width / 6.5,
           child: Center(
             child: Text(
-              getLabel(Provider.of<GameBoard>(context).gameBoard[widget.index]),
+              Provider.of<GameBoard>(context).gameBoardString[widget.index],
               style: kMainTextStyle,
             ),
           )),

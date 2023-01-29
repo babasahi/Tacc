@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tic_tac_toe/components/board.dart';
+import 'package:tic_tac_toe/components/board_screen_components.dart';
 import 'package:tic_tac_toe/components/common.dart';
 import 'package:tic_tac_toe/components/home_screen_components.dart';
 import 'package:tic_tac_toe/constants.dart';
