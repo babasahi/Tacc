@@ -10,13 +10,11 @@ String lost = 'You Lost 😪 ';
 String draw = 'Draw 😎';
 
 // COLORS :
-const Color primaryColor = Color(0xFFFFFC00);
-Color? unSelectedColor = Colors.yellow[200];
-Color? selectedColor = Colors.yellow;
-
-const Color c = Color(0xFF6C12EE);
-const Color secondaryColor = Colors.white;
-const Color bordersColor = Colors.white;
+const Color kPrimaryColor = Color(0xFFFFFC00);
+Color? kUnSelectedColor = Colors.yellow[200];
+Color? kSelectedColor = Colors.yellow;
+const Color kSecondaryColor = Color(0xFF6C12EE);
+const Color kBackgroundColor = Colors.white;
 
 // TEXTSTYLES
 const TextStyle kBigChoice = TextStyle(

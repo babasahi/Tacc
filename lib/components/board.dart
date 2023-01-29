@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/components/home_screen_components.dart';
+import 'package:tic_tac_toe/constants.dart';
 
 class TheBoard extends StatefulWidget {
   TheBoard();
@@ -18,7 +19,7 @@ class _TheBoardState extends State<TheBoard> {
           borderRadius: BorderRadius.all(
             Radius.circular(24),
           ),
-          color: Colors.deepPurpleAccent[400],
+          color: kSecondaryColor.withOpacity(0.2),
         ),
         child: Column(
           children: [

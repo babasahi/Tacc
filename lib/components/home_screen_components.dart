@@ -17,34 +17,6 @@ class _PlayerPickerState extends State<PlayerPicker> {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.symmetric(vertical: 12),
-            padding: EdgeInsets.all(6),
-            width: MediaQuery.of(context).size.width / 4,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(14),
-              ),
-              color: Colors.deepPurpleAccent[400],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: Text(
-                    'You : ',
-                    style: kChoiceStyle,
-                  ),
-                ),
-                Center(
-                  child: Text(
-                    playerChoice,
-                    style: kChoiceStyle,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
             decoration: BoxDecoration(
               border: Border.all(
                 color: Colors.white,
@@ -75,8 +47,8 @@ class _PlayerPickerState extends State<PlayerPicker> {
                           topLeft: Radius.circular(14),
                         ),
                         color: Provider.of<GameBoard>(context).isX
-                            ? selectedColor
-                            : unSelectedColor,
+                            ? kSelectedColor
+                            : kUnSelectedColor,
                       ),
                       child: Center(
                         child: Text(
@@ -103,8 +75,8 @@ class _PlayerPickerState extends State<PlayerPicker> {
                           topRight: Radius.circular(14),
                         ),
                         color: Provider.of<GameBoard>(context).isX
-                            ? unSelectedColor
-                            : selectedColor,
+                            ? kUnSelectedColor
+                            : kSelectedColor,
                       ),
                       child: Center(
                         child: Text(
