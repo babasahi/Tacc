@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/components/board.dart';
 import 'package:tic_tac_toe/components/common.dart';
@@ -18,7 +17,7 @@ class GameBoardPage extends StatefulWidget {
 class _GameBoardPageState extends State<GameBoardPage> {
   Widget showModal() {
     Provider.of<GameBoard>(context, listen: false).showAlert
-        ? showMaterialModalBottomSheet(
+        ? showBottomSheet(
             context: context,
             builder: (context) {
               return Container(
