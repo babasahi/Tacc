@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tic_tac_toe/constants.dart';
 import 'package:tic_tac_toe/models/models.dart';
-import 'package:tic_tac_toe/controllers/game_logic_provider.dart';
+import 'package:tic_tac_toe/controllers/providers.dart';
 import 'package:tic_tac_toe/controllers/sound_seffects_provider.dart';
 
 class PlayerPicker extends StatefulWidget {
