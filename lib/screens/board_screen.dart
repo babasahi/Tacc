@@ -42,7 +42,7 @@ class _GameBoardPageState extends State<GameBoardPage> {
         appBar: AppBar(
           leading: ReturnIcon(destination: HomePage()),
           elevation: 1,
-          backgroundColor: Theme.of(context).backgroundColor,
+          backgroundColor: Theme.of(context).colorScheme.background,
           title: Text('Tacc', style: kAppTitleStyle),
           centerTitle: true,
           actions: [
@@ -71,7 +71,7 @@ class _GameBoardPageState extends State<GameBoardPage> {
           ],
           builder: (context, child) => SafeArea(
             child: Container(
-              color: Theme.of(context).backgroundColor,
+              color: Theme.of(context).colorScheme.background,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

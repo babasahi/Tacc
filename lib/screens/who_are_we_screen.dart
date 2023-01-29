@@ -22,7 +22,7 @@ class WhoAreWe extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           elevation: 1,
-          backgroundColor: Theme.of(context).backgroundColor,
+          backgroundColor: Theme.of(context).colorScheme.background,
           title: Text('Tacc', style: kAppTitleStyle),
           centerTitle: true,
           leading: ReturnIcon(

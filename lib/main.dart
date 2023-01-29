@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/constants.dart';
 import 'package:tic_tac_toe/screens/home_screen.dart';
 
 void main() {
@@ -10,9 +9,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
-            backgroundColor: secondaryColor, primaryColor: primaryColor),
-        debugShowCheckedModeBanner: false,
-        home: HomePage());
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    );
   }
 }
