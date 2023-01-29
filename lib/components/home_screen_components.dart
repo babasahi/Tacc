@@ -5,93 +5,82 @@ import 'package:tic_tac_toe/models/models.dart';
 import 'package:tic_tac_toe/controllers/providers.dart';
 import 'package:tic_tac_toe/controllers/sound_seffects_provider.dart';
 
-class PlayerPicker extends StatefulWidget {
-  @override
-  _PlayerPickerState createState() => _PlayerPickerState();
-}
-
-class _PlayerPickerState extends State<PlayerPicker> {
+class PlayerPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.white,
-                width: 2,
-              ),
-              borderRadius: BorderRadius.all(
-                Radius.circular(14),
-              ),
-              color: Theme.of(context).primaryColor,
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(14),
             ),
-            height: MediaQuery.of(context).size.height / 12,
-            width: MediaQuery.of(context).size.width / 1.5,
-            child: Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      if (!Provider.of<GameBoard>(context, listen: false)
-                          .hasAlreadyPlayed()) {
-                        Provider.of<GameBoard>(context, listen: false)
-                            .setIsX(true);
-                      }
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(14),
-                          topLeft: Radius.circular(14),
-                        ),
-                        color: Provider.of<GameBoard>(context).isX
-                            ? kSelectedColor
-                            : kUnSelectedColor,
+            color: kPrimaryColor,
+          ),
+          height: MediaQuery.of(context).size.height / 12,
+          width: MediaQuery.of(context).size.width / 1.5,
+          child: Row(
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    if (!Provider.of<GameBoard>(context, listen: false)
+                        .hasAlreadyPlayed()) {
+                      Provider.of<GameBoard>(context, listen: false)
+                          .setIsX(true);
+                    }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(14),
+                        topLeft: Radius.circular(14),
                       ),
-                      child: Center(
-                        child: Text(
-                          'X',
-                          style: kBigChoice,
-                        ),
+                      color: Provider.of<GameBoard>(context).isX
+                          ? kSelectedColor
+                          : kUnSelectedColor,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'X',
+                        style: kBigChoice,
                       ),
                     ),
                   ),
                 ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      if (!Provider.of<GameBoard>(context, listen: false)
-                          .hasAlreadyPlayed()) {
-                        Provider.of<GameBoard>(context, listen: false)
-                            .setIsX(false);
-                      }
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(14),
-                          topRight: Radius.circular(14),
-                        ),
-                        color: Provider.of<GameBoard>(context).isX
-                            ? kUnSelectedColor
-                            : kSelectedColor,
+              ),
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    if (!Provider.of<GameBoard>(context, listen: false)
+                        .hasAlreadyPlayed()) {
+                      Provider.of<GameBoard>(context, listen: false)
+                          .setIsX(false);
+                    }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(14),
+                        topRight: Radius.circular(14),
                       ),
-                      child: Center(
-                        child: Text(
-                          'O',
-                          style: kBigChoice,
-                        ),
+                      color: Provider.of<GameBoard>(context).isX
+                          ? kUnSelectedColor
+                          : kSelectedColor,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'O',
+                        style: kBigChoice,
                       ),
                     ),
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -173,9 +162,8 @@ class _BoardUnitWidgetState extends State<BoardUnitWidget> {
               ),
               border: Border.all(color: Colors.black, width: 2)),
           margin: EdgeInsets.all(2),
-          //TODO: fix this
-          height: MediaQuery.of(context).size.width / 12.5,
-          width: MediaQuery.of(context).size.width / 3.5,
+          height: MediaQuery.of(context).size.width / 5.5,
+          width: MediaQuery.of(context).size.width / 6.5,
           child: Center(
             child: Text(
               getLabel(Provider.of<GameBoard>(context).gameBoard[widget.index]),
