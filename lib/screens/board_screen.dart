@@ -6,8 +6,8 @@ import 'package:tic_tac_toe/components/home_screen_components.dart';
 import 'package:tic_tac_toe/constants.dart';
 import 'package:tic_tac_toe/screens/home_screen.dart';
 import 'package:tic_tac_toe/screens/who_are_we_screen.dart';
-import 'package:tic_tac_toe/services/game_logic_provider.dart';
-import 'package:tic_tac_toe/services/sound_seffects_provider.dart';
+import 'package:tic_tac_toe/controllers/game_logic_provider.dart';
+import 'package:tic_tac_toe/controllers/sound_seffects_provider.dart';
 
 class GameBoardPage extends StatefulWidget {
   @override
